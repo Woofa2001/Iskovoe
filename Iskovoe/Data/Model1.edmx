@@ -1,0 +1,618 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище IskovoeModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Debtors">
+          <Key>
+            <PropertyRef Name="id_dolg" />
+          </Key>
+          <Property Name="id_dolg" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_dolg" Type="varchar" MaxLength="90" />
+          <Property Name="inn" Type="varchar" MaxLength="12" />
+          <Property Name="phone" Type="varchar" MaxLength="12" />
+          <Property Name="kpp" Type="varchar" MaxLength="9" />
+          <Property Name="adress" Type="varchar" MaxLength="70" />
+        </EntityType>
+        <EntityType Name="Docement_by_pravonor">
+          <Key>
+            <PropertyRef Name="id_doc_prav" />
+          </Key>
+          <Property Name="id_doc_prav" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_pravonor" Type="int" />
+          <Property Name="id_tip_dop" Type="int" />
+          <Property Name="num" Type="int" />
+          <Property Name="data_doc" Type="date" />
+        </EntityType>
+        <EntityType Name="Executor">
+          <Key>
+            <PropertyRef Name="id_executor" />
+          </Key>
+          <Property Name="id_executor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_post" Type="int" />
+          <Property Name="name_executor" Type="varchar" MaxLength="100" />
+          <Property Name="passport" Type="int" />
+          <Property Name="login" Type="varchar" MaxLength="20" />
+          <Property Name="password" Type="varchar" MaxLength="10" />
+          <Property Name="image" Type="image" />
+        </EntityType>
+        <EntityType Name="Iskovoe">
+          <Key>
+            <PropertyRef Name="id_iskovoe" />
+          </Key>
+          <Property Name="id_iskovoe" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_dolg" Type="int" />
+          <Property Name="id_executor" Type="int" />
+          <Property Name="data_iscovoe" Type="date" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="id_post" />
+          </Key>
+          <Property Name="id_post" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_post" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Pravonor">
+          <Key>
+            <PropertyRef Name="id_pravonor" />
+          </Key>
+          <Property Name="id_pravonor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_iskovoe" Type="int" />
+          <Property Name="id_tip_form" Type="int" />
+          <Property Name="id_sostav" Type="int" />
+          <Property Name="opis" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Sostav">
+          <Key>
+            <PropertyRef Name="id_sostav" />
+          </Key>
+          <Property Name="id_sostav" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_sostav" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tip_documents">
+          <Key>
+            <PropertyRef Name="id_tip_dop" />
+          </Key>
+          <Property Name="id_tip_dop" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_tip_dop" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Tip_forms">
+          <Key>
+            <PropertyRef Name="id_tip_form" />
+          </Key>
+          <Property Name="id_tip_form" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_tip_form" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <Association Name="FK_Docement_by_pravonor_Pravonor">
+          <End Role="Pravonor" Type="Self.Pravonor" Multiplicity="0..1" />
+          <End Role="Docement_by_pravonor" Type="Self.Docement_by_pravonor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pravonor">
+              <PropertyRef Name="id_pravonor" />
+            </Principal>
+            <Dependent Role="Docement_by_pravonor">
+              <PropertyRef Name="id_pravonor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Docement_by_pravonor_Tip_documents">
+          <End Role="Tip_documents" Type="Self.Tip_documents" Multiplicity="0..1" />
+          <End Role="Docement_by_pravonor" Type="Self.Docement_by_pravonor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tip_documents">
+              <PropertyRef Name="id_tip_dop" />
+            </Principal>
+            <Dependent Role="Docement_by_pravonor">
+              <PropertyRef Name="id_tip_dop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Executor_Post">
+          <End Role="Post" Type="Self.Post" Multiplicity="0..1" />
+          <End Role="Executor" Type="Self.Executor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="id_post" />
+            </Principal>
+            <Dependent Role="Executor">
+              <PropertyRef Name="id_post" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Iskovoe_Debtors2">
+          <End Role="Debtors" Type="Self.Debtors" Multiplicity="0..1" />
+          <End Role="Iskovoe" Type="Self.Iskovoe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Debtors">
+              <PropertyRef Name="id_dolg" />
+            </Principal>
+            <Dependent Role="Iskovoe">
+              <PropertyRef Name="id_dolg" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Iskovoe_Executor">
+          <End Role="Executor" Type="Self.Executor" Multiplicity="0..1" />
+          <End Role="Iskovoe" Type="Self.Iskovoe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Executor">
+              <PropertyRef Name="id_executor" />
+            </Principal>
+            <Dependent Role="Iskovoe">
+              <PropertyRef Name="id_executor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pravonor_Iskovoe">
+          <End Role="Iskovoe" Type="Self.Iskovoe" Multiplicity="0..1" />
+          <End Role="Pravonor" Type="Self.Pravonor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Iskovoe">
+              <PropertyRef Name="id_iskovoe" />
+            </Principal>
+            <Dependent Role="Pravonor">
+              <PropertyRef Name="id_iskovoe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pravonor_Sostav">
+          <End Role="Sostav" Type="Self.Sostav" Multiplicity="0..1" />
+          <End Role="Pravonor" Type="Self.Pravonor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sostav">
+              <PropertyRef Name="id_sostav" />
+            </Principal>
+            <Dependent Role="Pravonor">
+              <PropertyRef Name="id_sostav" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pravonor_Tip_forms">
+          <End Role="Tip_forms" Type="Self.Tip_forms" Multiplicity="0..1" />
+          <End Role="Pravonor" Type="Self.Pravonor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tip_forms">
+              <PropertyRef Name="id_tip_form" />
+            </Principal>
+            <Dependent Role="Pravonor">
+              <PropertyRef Name="id_tip_form" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище IskovoeModelContainer">
+          <EntitySet Name="Debtors" EntityType="Self.Debtors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Docement_by_pravonor" EntityType="Self.Docement_by_pravonor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Executor" EntityType="Self.Executor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Iskovoe" EntityType="Self.Iskovoe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pravonor" EntityType="Self.Pravonor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sostav" EntityType="Self.Sostav" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tip_documents" EntityType="Self.Tip_documents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tip_forms" EntityType="Self.Tip_forms" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Docement_by_pravonor_Pravonor" Association="Self.FK_Docement_by_pravonor_Pravonor">
+            <End Role="Pravonor" EntitySet="Pravonor" />
+            <End Role="Docement_by_pravonor" EntitySet="Docement_by_pravonor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Docement_by_pravonor_Tip_documents" Association="Self.FK_Docement_by_pravonor_Tip_documents">
+            <End Role="Tip_documents" EntitySet="Tip_documents" />
+            <End Role="Docement_by_pravonor" EntitySet="Docement_by_pravonor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Executor_Post" Association="Self.FK_Executor_Post">
+            <End Role="Post" EntitySet="Post" />
+            <End Role="Executor" EntitySet="Executor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Iskovoe_Debtors2" Association="Self.FK_Iskovoe_Debtors2">
+            <End Role="Debtors" EntitySet="Debtors" />
+            <End Role="Iskovoe" EntitySet="Iskovoe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Iskovoe_Executor" Association="Self.FK_Iskovoe_Executor">
+            <End Role="Executor" EntitySet="Executor" />
+            <End Role="Iskovoe" EntitySet="Iskovoe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pravonor_Iskovoe" Association="Self.FK_Pravonor_Iskovoe">
+            <End Role="Iskovoe" EntitySet="Iskovoe" />
+            <End Role="Pravonor" EntitySet="Pravonor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pravonor_Sostav" Association="Self.FK_Pravonor_Sostav">
+            <End Role="Sostav" EntitySet="Sostav" />
+            <End Role="Pravonor" EntitySet="Pravonor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pravonor_Tip_forms" Association="Self.FK_Pravonor_Tip_forms">
+            <End Role="Tip_forms" EntitySet="Tip_forms" />
+            <End Role="Pravonor" EntitySet="Pravonor" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="IskovoeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Debtors">
+          <Key>
+            <PropertyRef Name="id_dolg" />
+          </Key>
+          <Property Name="id_dolg" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_dolg" Type="String" MaxLength="90" FixedLength="false" Unicode="false" />
+          <Property Name="inn" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="kpp" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="adress" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Iskovoe" Relationship="Self.FK_Iskovoe_Debtors2" FromRole="Debtors" ToRole="Iskovoe" />
+        </EntityType>
+        <EntityType Name="Docement_by_pravonor">
+          <Key>
+            <PropertyRef Name="id_doc_prav" />
+          </Key>
+          <Property Name="id_doc_prav" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_pravonor" Type="Int32" />
+          <Property Name="id_tip_dop" Type="Int32" />
+          <Property Name="num" Type="Int32" />
+          <Property Name="data_doc" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Pravonor" Relationship="Self.FK_Docement_by_pravonor_Pravonor" FromRole="Docement_by_pravonor" ToRole="Pravonor" />
+          <NavigationProperty Name="Tip_documents" Relationship="Self.FK_Docement_by_pravonor_Tip_documents" FromRole="Docement_by_pravonor" ToRole="Tip_documents" />
+        </EntityType>
+        <EntityType Name="Executor">
+          <Key>
+            <PropertyRef Name="id_executor" />
+          </Key>
+          <Property Name="id_executor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_post" Type="Int32" />
+          <Property Name="name_executor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="passport" Type="Int32" />
+          <Property Name="login" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Post" Relationship="Self.FK_Executor_Post" FromRole="Executor" ToRole="Post" />
+          <NavigationProperty Name="Iskovoe" Relationship="Self.FK_Iskovoe_Executor" FromRole="Executor" ToRole="Iskovoe" />
+        </EntityType>
+        <EntityType Name="Iskovoe">
+          <Key>
+            <PropertyRef Name="id_iskovoe" />
+          </Key>
+          <Property Name="id_iskovoe" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_dolg" Type="Int32" />
+          <Property Name="id_executor" Type="Int32" />
+          <Property Name="data_iscovoe" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Debtors" Relationship="Self.FK_Iskovoe_Debtors2" FromRole="Iskovoe" ToRole="Debtors" />
+          <NavigationProperty Name="Executor" Relationship="Self.FK_Iskovoe_Executor" FromRole="Iskovoe" ToRole="Executor" />
+          <NavigationProperty Name="Pravonor" Relationship="Self.FK_Pravonor_Iskovoe" FromRole="Iskovoe" ToRole="Pravonor" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="id_post" />
+          </Key>
+          <Property Name="id_post" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_post" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Executor" Relationship="Self.FK_Executor_Post" FromRole="Post" ToRole="Executor" />
+        </EntityType>
+        <EntityType Name="Pravonor">
+          <Key>
+            <PropertyRef Name="id_pravonor" />
+          </Key>
+          <Property Name="id_pravonor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_iskovoe" Type="Int32" />
+          <Property Name="id_tip_form" Type="Int32" />
+          <Property Name="id_sostav" Type="Int32" />
+          <Property Name="opis" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Docement_by_pravonor" Relationship="Self.FK_Docement_by_pravonor_Pravonor" FromRole="Pravonor" ToRole="Docement_by_pravonor" />
+          <NavigationProperty Name="Iskovoe" Relationship="Self.FK_Pravonor_Iskovoe" FromRole="Pravonor" ToRole="Iskovoe" />
+          <NavigationProperty Name="Sostav" Relationship="Self.FK_Pravonor_Sostav" FromRole="Pravonor" ToRole="Sostav" />
+          <NavigationProperty Name="Tip_forms" Relationship="Self.FK_Pravonor_Tip_forms" FromRole="Pravonor" ToRole="Tip_forms" />
+        </EntityType>
+        <EntityType Name="Sostav">
+          <Key>
+            <PropertyRef Name="id_sostav" />
+          </Key>
+          <Property Name="id_sostav" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_sostav" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Pravonor" Relationship="Self.FK_Pravonor_Sostav" FromRole="Sostav" ToRole="Pravonor" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tip_documents">
+          <Key>
+            <PropertyRef Name="id_tip_dop" />
+          </Key>
+          <Property Name="id_tip_dop" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_tip_dop" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Docement_by_pravonor" Relationship="Self.FK_Docement_by_pravonor_Tip_documents" FromRole="Tip_documents" ToRole="Docement_by_pravonor" />
+        </EntityType>
+        <EntityType Name="Tip_forms">
+          <Key>
+            <PropertyRef Name="id_tip_form" />
+          </Key>
+          <Property Name="id_tip_form" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_tip_form" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Pravonor" Relationship="Self.FK_Pravonor_Tip_forms" FromRole="Tip_forms" ToRole="Pravonor" />
+        </EntityType>
+        <Association Name="FK_Iskovoe_Debtors2">
+          <End Role="Debtors" Type="Self.Debtors" Multiplicity="0..1" />
+          <End Role="Iskovoe" Type="Self.Iskovoe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Debtors">
+              <PropertyRef Name="id_dolg" />
+            </Principal>
+            <Dependent Role="Iskovoe">
+              <PropertyRef Name="id_dolg" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Docement_by_pravonor_Pravonor">
+          <End Role="Pravonor" Type="Self.Pravonor" Multiplicity="0..1" />
+          <End Role="Docement_by_pravonor" Type="Self.Docement_by_pravonor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pravonor">
+              <PropertyRef Name="id_pravonor" />
+            </Principal>
+            <Dependent Role="Docement_by_pravonor">
+              <PropertyRef Name="id_pravonor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Docement_by_pravonor_Tip_documents">
+          <End Role="Tip_documents" Type="Self.Tip_documents" Multiplicity="0..1" />
+          <End Role="Docement_by_pravonor" Type="Self.Docement_by_pravonor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tip_documents">
+              <PropertyRef Name="id_tip_dop" />
+            </Principal>
+            <Dependent Role="Docement_by_pravonor">
+              <PropertyRef Name="id_tip_dop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Executor_Post">
+          <End Role="Post" Type="Self.Post" Multiplicity="0..1" />
+          <End Role="Executor" Type="Self.Executor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="id_post" />
+            </Principal>
+            <Dependent Role="Executor">
+              <PropertyRef Name="id_post" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Iskovoe_Executor">
+          <End Role="Executor" Type="Self.Executor" Multiplicity="0..1" />
+          <End Role="Iskovoe" Type="Self.Iskovoe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Executor">
+              <PropertyRef Name="id_executor" />
+            </Principal>
+            <Dependent Role="Iskovoe">
+              <PropertyRef Name="id_executor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pravonor_Iskovoe">
+          <End Role="Iskovoe" Type="Self.Iskovoe" Multiplicity="0..1" />
+          <End Role="Pravonor" Type="Self.Pravonor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Iskovoe">
+              <PropertyRef Name="id_iskovoe" />
+            </Principal>
+            <Dependent Role="Pravonor">
+              <PropertyRef Name="id_iskovoe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pravonor_Sostav">
+          <End Role="Sostav" Type="Self.Sostav" Multiplicity="0..1" />
+          <End Role="Pravonor" Type="Self.Pravonor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sostav">
+              <PropertyRef Name="id_sostav" />
+            </Principal>
+            <Dependent Role="Pravonor">
+              <PropertyRef Name="id_sostav" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pravonor_Tip_forms">
+          <End Role="Tip_forms" Type="Self.Tip_forms" Multiplicity="0..1" />
+          <End Role="Pravonor" Type="Self.Pravonor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tip_forms">
+              <PropertyRef Name="id_tip_form" />
+            </Principal>
+            <Dependent Role="Pravonor">
+              <PropertyRef Name="id_tip_form" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="IskovoeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Debtors" EntityType="Self.Debtors" />
+          <EntitySet Name="Docement_by_pravonor" EntityType="Self.Docement_by_pravonor" />
+          <EntitySet Name="Executor" EntityType="Self.Executor" />
+          <EntitySet Name="Iskovoe" EntityType="Self.Iskovoe" />
+          <EntitySet Name="Post" EntityType="Self.Post" />
+          <EntitySet Name="Pravonor" EntityType="Self.Pravonor" />
+          <EntitySet Name="Sostav" EntityType="Self.Sostav" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Tip_documents" EntityType="Self.Tip_documents" />
+          <EntitySet Name="Tip_forms" EntityType="Self.Tip_forms" />
+          <AssociationSet Name="FK_Iskovoe_Debtors2" Association="Self.FK_Iskovoe_Debtors2">
+            <End Role="Debtors" EntitySet="Debtors" />
+            <End Role="Iskovoe" EntitySet="Iskovoe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Docement_by_pravonor_Pravonor" Association="Self.FK_Docement_by_pravonor_Pravonor">
+            <End Role="Pravonor" EntitySet="Pravonor" />
+            <End Role="Docement_by_pravonor" EntitySet="Docement_by_pravonor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Docement_by_pravonor_Tip_documents" Association="Self.FK_Docement_by_pravonor_Tip_documents">
+            <End Role="Tip_documents" EntitySet="Tip_documents" />
+            <End Role="Docement_by_pravonor" EntitySet="Docement_by_pravonor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Executor_Post" Association="Self.FK_Executor_Post">
+            <End Role="Post" EntitySet="Post" />
+            <End Role="Executor" EntitySet="Executor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Iskovoe_Executor" Association="Self.FK_Iskovoe_Executor">
+            <End Role="Executor" EntitySet="Executor" />
+            <End Role="Iskovoe" EntitySet="Iskovoe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pravonor_Iskovoe" Association="Self.FK_Pravonor_Iskovoe">
+            <End Role="Iskovoe" EntitySet="Iskovoe" />
+            <End Role="Pravonor" EntitySet="Pravonor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pravonor_Sostav" Association="Self.FK_Pravonor_Sostav">
+            <End Role="Sostav" EntitySet="Sostav" />
+            <End Role="Pravonor" EntitySet="Pravonor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pravonor_Tip_forms" Association="Self.FK_Pravonor_Tip_forms">
+            <End Role="Tip_forms" EntitySet="Tip_forms" />
+            <End Role="Pravonor" EntitySet="Pravonor" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище IskovoeModelContainer" CdmEntityContainer="IskovoeEntities">
+          <EntitySetMapping Name="Debtors">
+            <EntityTypeMapping TypeName="IskovoeModel.Debtors">
+              <MappingFragment StoreEntitySet="Debtors">
+                <ScalarProperty Name="id_dolg" ColumnName="id_dolg" />
+                <ScalarProperty Name="name_dolg" ColumnName="name_dolg" />
+                <ScalarProperty Name="inn" ColumnName="inn" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="kpp" ColumnName="kpp" />
+                <ScalarProperty Name="adress" ColumnName="adress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Docement_by_pravonor">
+            <EntityTypeMapping TypeName="IskovoeModel.Docement_by_pravonor">
+              <MappingFragment StoreEntitySet="Docement_by_pravonor">
+                <ScalarProperty Name="id_doc_prav" ColumnName="id_doc_prav" />
+                <ScalarProperty Name="id_pravonor" ColumnName="id_pravonor" />
+                <ScalarProperty Name="id_tip_dop" ColumnName="id_tip_dop" />
+                <ScalarProperty Name="num" ColumnName="num" />
+                <ScalarProperty Name="data_doc" ColumnName="data_doc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Executor">
+            <EntityTypeMapping TypeName="IskovoeModel.Executor">
+              <MappingFragment StoreEntitySet="Executor">
+                <ScalarProperty Name="id_executor" ColumnName="id_executor" />
+                <ScalarProperty Name="id_post" ColumnName="id_post" />
+                <ScalarProperty Name="name_executor" ColumnName="name_executor" />
+                <ScalarProperty Name="passport" ColumnName="passport" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="image" ColumnName="image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Iskovoe">
+            <EntityTypeMapping TypeName="IskovoeModel.Iskovoe">
+              <MappingFragment StoreEntitySet="Iskovoe">
+                <ScalarProperty Name="id_iskovoe" ColumnName="id_iskovoe" />
+                <ScalarProperty Name="id_dolg" ColumnName="id_dolg" />
+                <ScalarProperty Name="id_executor" ColumnName="id_executor" />
+                <ScalarProperty Name="data_iscovoe" ColumnName="data_iscovoe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Post">
+            <EntityTypeMapping TypeName="IskovoeModel.Post">
+              <MappingFragment StoreEntitySet="Post">
+                <ScalarProperty Name="id_post" ColumnName="id_post" />
+                <ScalarProperty Name="name_post" ColumnName="name_post" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pravonor">
+            <EntityTypeMapping TypeName="IskovoeModel.Pravonor">
+              <MappingFragment StoreEntitySet="Pravonor">
+                <ScalarProperty Name="id_pravonor" ColumnName="id_pravonor" />
+                <ScalarProperty Name="id_iskovoe" ColumnName="id_iskovoe" />
+                <ScalarProperty Name="id_tip_form" ColumnName="id_tip_form" />
+                <ScalarProperty Name="id_sostav" ColumnName="id_sostav" />
+                <ScalarProperty Name="opis" ColumnName="opis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sostav">
+            <EntityTypeMapping TypeName="IskovoeModel.Sostav">
+              <MappingFragment StoreEntitySet="Sostav">
+                <ScalarProperty Name="id_sostav" ColumnName="id_sostav" />
+                <ScalarProperty Name="name_sostav" ColumnName="name_sostav" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="IskovoeModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tip_documents">
+            <EntityTypeMapping TypeName="IskovoeModel.Tip_documents">
+              <MappingFragment StoreEntitySet="Tip_documents">
+                <ScalarProperty Name="id_tip_dop" ColumnName="id_tip_dop" />
+                <ScalarProperty Name="name_tip_dop" ColumnName="name_tip_dop" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tip_forms">
+            <EntityTypeMapping TypeName="IskovoeModel.Tip_forms">
+              <MappingFragment StoreEntitySet="Tip_forms">
+                <ScalarProperty Name="id_tip_form" ColumnName="id_tip_form" />
+                <ScalarProperty Name="name_tip_form" ColumnName="name_tip_form" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
