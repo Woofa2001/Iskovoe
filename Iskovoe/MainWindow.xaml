@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Iskovoe"
         mc:Ignorable="d"
-        Title="Главное окно" Height="450" Width="900" FontSize="13" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
-    <Window.Resources>
+        Title="Главное окно" Height="450" Width="900" FontSize="13" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize">
+    <Window.Resources> 
         <LinearGradientBrush x:Key="HeaderBrush" StartPoint="0.5,0" EndPoint="0.5,1">
             <GradientStop Color="#FF6B8E95" Offset="0"/>
             <GradientStop Color="#FF14A7C1" Offset="1"/>
@@ -64,30 +64,57 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="31"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="45"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
 
-        <Rectangle x:Name="Rectangle" Fill="#021C1E" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Width="5"/>
+        <Grid Grid.Row="0" Grid.ColumnSpan="3" MouseDown="RowDefinition_MouseDown">
+            <Rectangle Fill="Transparent" Height="40" />
+            <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,5,0,0" Height="40" Orientation="Horizontal" FlowDirection="RightToLeft">
+                <Label Foreground="White" FontSize="19">Главное окно</Label>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,10,0" Height="30" Orientation="Horizontal" FlowDirection="RightToLeft">
+                <Button x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Click="btnClose_Click" Tag="IsCloseButton"/>
+                <Button x:Name="btnRestore" Margin="5,0" Click="btnRestore_Click">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource IconButtonsStyle}">
+                            <Setter Property="Content" Value="{DynamicResource maximize}"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=home, Path=WindowState}" Value="Maximized">
+                                    <Setter Property="Content" Value="{DynamicResource restore}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button x:Name="btnMinimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource minimize}" Click="btnMinimize_Click"/>
+            </StackPanel>
+        </Grid>
+        
+        <Rectangle x:Name="Rectangle" Fill="Gray" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Width="3"/>
 
-        <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Horizontal">
-            <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal">
-                <Label Foreground="White" FontSize="14" >Ваши исковые заявления</Label>
-                <ComboBox Name="FilterCombobox" Width="200" Margin="0 1 15 1" SelectionChanged="FilterCombobox_SelectionChanged" />
-                <TextBox x:Name="TextBoxStart" Width="150" Margin="5,1,0,1"  TextChanged="TextBox_TextChanged"></TextBox>
-                <TextBox x:Name="TextBoxEnd" Width="85" Margin="5,1,0,1" TextChanged="TextBoxEnd_TextChanged" Visibility="Hidden" />
+        <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Horizontal" Margin="0 5 0 5">
+            <StackPanel  Orientation="Horizontal">
+                <Label Foreground="White" FontSize="15" Margin="0 1 15 1" >Ваши исковые заявления</Label>
+                <ComboBox Name="FilterCombobox" Width="220" Margin="0 1 15 1" SelectionChanged="FilterCombobox_SelectionChanged" />
+                <TextBox x:Name="TextBoxStart" Width="270" Margin="5,1,0,1"  TextChanged="TextBox_TextChanged"></TextBox>
+                <TextBox x:Name="TextBoxEnd" Width="135" Margin="5,1,0,1" TextChanged="TextBoxEnd_TextChanged" Visibility="Hidden" />
             </StackPanel>
         </StackPanel>
 
-        <Grid x:Name="gridMenu" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" >
+        <Grid x:Name="gridMenu" Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             
             <StackPanel Orientation="Horizontal" >
-                <Image Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" Source="Image/ico-kontakty.png" />
-
+                <Ellipse Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="Image/ico-kontakty.png"/>
+                    </Ellipse.Fill>
+                </Ellipse>
                 <StackPanel x:Name="StackLabel" Visibility="Collapsed">
                     <Label Foreground="White" FontSize="14" x:Name="NameLabel"></Label>
                     <Label Foreground="White" FontSize="14" x:Name="INNLabel"></Label>
@@ -118,7 +145,7 @@
             </ToggleButton>
         </Grid>
         
-        <DataGrid Name="DataGridIscovoe" Grid.Column="2" Grid.Row="1"  ColumnHeaderStyle="{StaticResource HeaderStyle}" RowStyle="{StaticResource RowStyle}" CellStyle="{StaticResource CellStyle}"  AutoGenerateColumns="False" CanUserAddRows="False"  >
+        <DataGrid Name="DataGridIscovoe" Grid.Column="2" Grid.Row="2"  ColumnHeaderStyle="{StaticResource HeaderStyle}" RowStyle="{StaticResource RowStyle}" CellStyle="{StaticResource CellStyle}"  AutoGenerateColumns="False" CanUserAddRows="False"  >
             <DataGrid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
@@ -148,7 +175,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel   Orientation="Vertical"  Grid.Column="2" Grid.Row="2">
+        <StackPanel   Orientation="Vertical"  Grid.Column="2" Grid.Row="3">
             <StackPanel Height="35" Orientation="Horizontal">
                 <Label Foreground="White"> Дополнительная навигация</Label>
             </StackPanel>

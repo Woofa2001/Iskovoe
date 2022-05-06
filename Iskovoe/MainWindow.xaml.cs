@@ -67,12 +67,12 @@ namespace Iskovoe
             if (FilterCombobox.SelectedIndex == 1)
             {
                 TextBoxEnd.Visibility = Visibility.Visible;
-                TextBoxStart.Width = 85;
+                TextBoxStart.Width = 135;
             }
             else
             {
                 TextBoxEnd.Visibility = Visibility.Hidden;
-                TextBoxStart.Width = 150;
+                TextBoxStart.Width = 270;
             }
         }
 
@@ -128,6 +128,29 @@ namespace Iskovoe
         private void Preview_Click(object sender, RoutedEventArgs e)
         {
             if (StackLabel.Visibility == Visibility.Visible) StackLabel.Visibility = Visibility.Collapsed; else StackLabel.Visibility = Visibility.Visible;
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void btnRestore_Click(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == WindowState.Normal)
+                WindowState = WindowState.Maximized;
+            else
+                WindowState = WindowState.Normal;
+        }
+
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void RowDefinition_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
         }
     }
 }
