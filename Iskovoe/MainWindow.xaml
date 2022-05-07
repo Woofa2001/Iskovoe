@@ -95,13 +95,10 @@
         
         <Rectangle x:Name="Rectangle" Fill="Gray" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Width="3"/>
 
-        <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Horizontal" Margin="0 5 0 5">
-            <StackPanel  Orientation="Horizontal">
-                <Label Foreground="White" FontSize="15" Margin="0 1 15 1" >Ваши исковые заявления</Label>
-                <ComboBox Name="FilterCombobox" Width="220" Margin="0 1 15 1" SelectionChanged="FilterCombobox_SelectionChanged" />
-                <TextBox x:Name="TextBoxStart" Width="270" Margin="5,1,0,1"  TextChanged="TextBox_TextChanged"></TextBox>
-                <TextBox x:Name="TextBoxEnd" Width="135" Margin="5,1,0,1" TextChanged="TextBoxEnd_TextChanged" Visibility="Hidden" />
-            </StackPanel>
+        <StackPanel  Grid.Column="2" Grid.Row="1" Orientation="Horizontal" Margin="0 5 0 5">
+            <ComboBox Name="FilterCombobox" Width="220" Margin="5 1 15 1" SelectionChanged="FilterCombobox_SelectionChanged" />
+            <TextBox x:Name="TextBoxStart" Width="270" Margin="5,1,0,1"  TextChanged="TextBox_TextChanged"></TextBox>
+            <TextBox x:Name="TextBoxEnd" Width="135" Margin="5,1,0,1" TextChanged="TextBoxEnd_TextChanged" Visibility="Hidden" />
         </StackPanel>
 
         <Grid x:Name="gridMenu" Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" >
@@ -110,7 +107,7 @@
             </Grid.RowDefinitions>
             
             <StackPanel Orientation="Horizontal" >
-                <Ellipse Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                <Ellipse Width="38" Height="38" Margin="4" HorizontalAlignment="Left" VerticalAlignment="Top" >
                     <Ellipse.Fill>
                         <ImageBrush ImageSource="Image/ico-kontakty.png"/>
                     </Ellipse.Fill>
@@ -123,7 +120,7 @@
                 </StackPanel>
             </StackPanel>
             
-            <ToggleButton x:Name="Preview" Height="40" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="40" Click="Preview_Click" Style="{StaticResource MenuIconStyle}">
+            <ToggleButton x:Name="Preview" Height="40" Margin="3" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="40" Click="Preview_Click" Style="{StaticResource MenuIconStyle}">
                 <ToggleButton.Triggers>
                     <EventTrigger RoutedEvent="ToggleButton.Unchecked">
                         <BeginStoryboard>
@@ -179,7 +176,7 @@
             <StackPanel Height="35" Orientation="Horizontal">
                 <Label Foreground="White"> Дополнительная навигация</Label>
             </StackPanel>
-            <Button Margin="15 0 15 0" Height="35" Content="Подготовить исковое заявление"/>
+            <Button Margin="15 0 15 0" Height="35" Content="Подготовить исковое заявление" Click="Button_Click"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -112,6 +112,15 @@
     <Compile Include="Data\Tip_forms.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="MakeIskovoeWindow.xaml.cs">
+      <DependentUpon>MakeIskovoeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AddDeptorPage.xaml.cs">
+      <DependentUpon>AddDeptorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DefinitionDeptorPage.xaml.cs">
+      <DependentUpon>DefinitionDeptorPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RegistrationWindows.xaml.cs">
       <DependentUpon>RegistrationWindows.xaml</DependentUpon>
     </Compile>
@@ -132,6 +141,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MakeIskovoeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AddDeptorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DefinitionDeptorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="RegistrationWindows.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -195,5 +216,6 @@
     <Resource Include="Image\avatar.jpg" />
     <Resource Include="Image\ico-kontakty.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

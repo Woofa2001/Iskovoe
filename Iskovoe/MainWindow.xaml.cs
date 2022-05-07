@@ -44,6 +44,7 @@ namespace Iskovoe
             {
                 ColumnProposals.CanUserSort = false;
             }
+
             if (SourceCore.DB.Executor.ToList()[buf_id-1].name_executor != null)
             {
                 NameLabel.Content = SourceCore.DB.Executor.ToList()[buf_id-1].name_executor.ToString();
@@ -151,6 +152,13 @@ namespace Iskovoe
         private void RowDefinition_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MakeIskovoeWindow window = new MakeIskovoeWindow();
+            window.Show();
+            Close();
         }
     }
 }

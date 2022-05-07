@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
 
 namespace Iskovoe
 {
@@ -33,65 +34,36 @@ namespace Iskovoe
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
-            if (LoginTextBox.Text.Length > 0) // проверяем логин
+            if (SourceCore.DB.Executor.Any(P => P.login == LoginTextBox.Text))
             {
-                if ((PasswordPasswordBox.Password.Length > 0) || (PasswordTextBox.Text.Length > 0)) // проверяем пароль
-                {
-                    if ((PasswordPasswordBox.Password.Length >= 6) || (PasswordTextBox.Text.Length >= 6))
-                    {
-                        if ((PasswordPasswordBoxTwo.Password.Length > 0) || (PasswordTextBoxTwo.Text.Length > 0)) // проверяем второй пароль
-                        {
-                            if ((PasswordPasswordBox.Password == PasswordPasswordBoxTwo.Password) && (PasswordTextBox.Text == PasswordTextBoxTwo.Text) || ((PasswordPasswordBox.Password == PasswordTextBoxTwo.Text) && (PasswordPasswordBoxTwo.Password == PasswordTextBox.Text))) // проверка на совпадение паролей
-                            {
-                                bool en = true; // английская раскладка
-                                bool symbol = false; // символ
-                                bool number = false; // цифра
-
-                                for (int i = 0; i < PasswordPasswordBox.Password.Length; i++) // перебираем символы
-                                {
-                                    if (PasswordPasswordBox.Password[i] >= 'А' && PasswordPasswordBox.Password[i] <= 'Я') en = false; // если русская раскладка
-                                    if (PasswordPasswordBox.Password[i] >= '0' && PasswordPasswordBox.Password[i] <= '9') number = true; // если цифры
-                                    if (PasswordPasswordBox.Password[i] == '_' || PasswordPasswordBox.Password[i] == '-' ||
-                                        PasswordPasswordBox.Password[i] == '!') symbol = true; // если символ
-                                }
-
-                                if (!en)
-                                    MessageBox.Show("Доступна только английская раскладка"); // выводим сообщение
-                                else if (!symbol)
-                                    MessageBox.Show("Добавьте один из следующих символов: _ - !"); // выводим сообщение
-                                else if (!number)
-                                    MessageBox.Show("Добавьте хотя бы одну цифру"); // выводим сообщение
-                                if (en && symbol && number) // проверяем соответствие
-                                {
-                                    // Создание и инициализация нового пользователя системы
-                                    Data.Executor Executor = Database.Executor.SingleOrDefault(u => u.login == LoginTextBox.Text);
-                                    Data.Executor Executors = new Data.Executor();
-                                    if (Executor == null)
-                                    {
-                                        Executor.login = LoginTextBox.Text;
-                                        Executor.password = PasswordPasswordBox.Password != "" ? PasswordPasswordBox.Password : PasswordTextBox.Text;
-                                        //Executor.ID_ROLE = 0;
-                                        // Добавление его в базу данных
-                                        Database.Executor.Add(Executor);
-                                        // Сохранение изменений
-                                        Database.SaveChanges();
-                                        MessageBox.Show("Пользователь зарегистрирован");
-                                        AutoritizationWindow window = new AutoritizationWindow();
-                                        Close();
-                                        window.ShowDialog();
-                                    }
-                                    else MessageBox.Show("Пользователь с таким логином уже существует");
-                                }
-                            }
-                            else MessageBox.Show("Пароли не совпадают");
-                        }
-                        else MessageBox.Show("Повторите пароль");
-                    }
-                    else MessageBox.Show("пароль слишком короткий, минимум 6 символов");
-                }
-                else MessageBox.Show("Укажите пароль");
+                MessageBox.Show("Логин занят", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.None);
             }
-            else MessageBox.Show("Укажите логин");
+            else
+            {
+                var input = PasswordTextBox.Text == "" ? PasswordPasswordBox.Password : PasswordTextBox.Text;
+                var Number = new Regex(@"[0-9]+");
+                var UpperChar = new Regex(@"[A-Z|А-Я]+");
+                var SpecialSymbol = new Regex(@"(?=.*[\W])");
+                var Min8Chars = new Regex(@".{8,}");
+                if (Number.IsMatch(input) && UpperChar.IsMatch(input) && SpecialSymbol.IsMatch(input) && Min8Chars.IsMatch(input))
+                {
+                    if ((PasswordPasswordBox.Password == PasswordPasswordBoxTwo.Password) && (PasswordTextBox.Text == PasswordTextBoxTwo.Text) || ((PasswordPasswordBox.Password == PasswordTextBoxTwo.Text) && (PasswordPasswordBoxTwo.Password == PasswordTextBox.Text))) // проверка на совпадение паролей
+                    {
+                        // Создание и инициализация нового пользователя системы
+                        Data.Executor User = new Data.Executor();
+                        User.login = LoginTextBox.Text;
+                        User.password = PasswordPasswordBox.Password != "" ? PasswordPasswordBox.Password : PasswordTextBox.Text;
+                        //User.name_user = "tr";
+                        // Добавление его в базу данных
+                        Database.Executor.Add(User);
+                        // Сохранение изменений
+                        Database.SaveChanges();
+                        Close();
+                    }
+                    else MessageBox.Show("Пароли не совпадают");
+                }
+                else MessageBox.Show("Введен не соотвествующий пароль.", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.None);
+            }
         }
 
         private void PasswordButton_Click(object sender, RoutedEventArgs e)
