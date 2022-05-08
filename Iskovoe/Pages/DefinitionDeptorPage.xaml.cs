@@ -20,16 +20,19 @@ namespace Iskovoe.Pages
     /// </summary>
     public partial class DefinitionDeptorPage : Page
     {
-        public DefinitionDeptorPage()
+        public MakeIskovoeWindow _window;
+        public DefinitionDeptorPage(MakeIskovoeWindow window)
         {
             InitializeComponent();
+            DataContext = this;
+            _window = window;
             DataGridDeptors.ItemsSource = SourceCore.DB.Debtors.ToList();
         }
 
         private void FilterCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             TextBoxStart.Text = "";
-        }
+        }   
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -51,7 +54,6 @@ namespace Iskovoe.Pages
                 case 4:
                     DataGridDeptors.ItemsSource = SourceCore.DB.Debtors.Where(filtercase => filtercase.adress.Contains(textbox.Text)).ToList();
                     break;
-
             }
         }
 
@@ -77,12 +79,12 @@ namespace Iskovoe.Pages
 
         private void AddDeptorsButton_Click(object sender, RoutedEventArgs e)
         {
-
+            _window.MakeIscovoeFrame.Navigate(new Pages.AddDeptorPage(_window));
         }
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
     }
 }

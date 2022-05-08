@@ -146,5 +146,7 @@
             <Button Width="380" Margin=" 10 3 10 3" x:Name="NextButton" Click="NextButton_Click" Content="Далее"/>
         </StackPanel>
 
+        <Frame Grid.RowSpan="5" x:Name="AddDeptorsFrame" />
+            
     </Grid>
 </Page>

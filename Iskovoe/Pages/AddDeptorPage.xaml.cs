@@ -20,9 +20,12 @@ namespace Iskovoe.Pages
     /// </summary>
     public partial class AddDeptorPage : Page
     {
-        public AddDeptorPage()
+        private MakeIskovoeWindow _window;
+        public AddDeptorPage(MakeIskovoeWindow window)
         {
             InitializeComponent();
+            DataContext = this;
+            _window = window;
         }
 
         private void AddDeptorsButton_Click(object sender, RoutedEventArgs e)
