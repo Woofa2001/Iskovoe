@@ -37,8 +37,6 @@ namespace Iskovoe
             }
         }
 
-        
-
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
             Data.Executor User = DataBase.Executor.SingleOrDefault(U => U.login == LoginTextBox.Text && (U.password == PasswordTextBox.Text || U.password == PasswordPasswordBox.Password));

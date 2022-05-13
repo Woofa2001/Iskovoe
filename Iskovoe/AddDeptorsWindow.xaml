@@ -1,14 +1,12 @@
-﻿<Page x:Class="Iskovoe.Pages.AddDeptorPage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Iskovoe.Pages"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="630"
-      Title="AddDeptorPage">
-
-    <Page.Resources>
+﻿<Window x:Class="Iskovoe.AddDeptorsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Iskovoe"
+        mc:Ignorable="d"
+        Title="AddDeptorsWindow" Height="330" Width="590" ResizeMode="NoResize">
+    <Window.Resources>
         <LinearGradientBrush x:Key="HeaderBrush" StartPoint="0.5,0" EndPoint="0.5,1">
             <GradientStop Color="#FF6B8E95" Offset="0"/>
             <GradientStop Color="#FF14A7C1" Offset="1"/>
@@ -52,7 +50,7 @@
             <Setter Property="FontSize" Value="13"/>
             <Setter Property="Foreground" Value="White"/>
         </Style>
-    </Page.Resources>
+    </Window.Resources>
 
     <Grid>
         <Grid.Background>
@@ -64,54 +62,50 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="45"/>
         </Grid.RowDefinitions>
 
         <Label Foreground="White" FontSize="20" Grid.Row="0" Margin="10 0 0 0 " >Добавление должника</Label>
 
-        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0 5 0 5">
-            
-            <StackPanel Orientation="Horizontal">
-                <CheckBox>  </CheckBox>
-                <ComboBox>  </ComboBox>
-                <TextBox Width="400" Margin="10 5"/>
-            </StackPanel>
+        <Grid Grid.Row="1" Margin="0 5 0 5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
 
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <Label Foreground="White" FontSize="15" Margin="10 5" Width="155">Наименование/ФИО</Label>
-                <TextBox Width="400" Margin="10 5"/>
+                <TextBox Width="380" Margin="10 5"/>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
                 <Label Foreground="White" FontSize="15" Width="155" Margin="10 5">ИНН</Label>
-                <TextBox Width="400" Margin="10 5"/>
+                <TextBox  Width="380" Margin="10 5"/>
             </StackPanel>
-            
-            <StackPanel Orientation="Horizontal">
+
+            <StackPanel Grid.Row="2" Orientation="Horizontal">
                 <Label Foreground="White" FontSize="15" Width="155" Margin="10 5">КПП</Label>
-                <TextBox Width="400" Margin="10 5"/>
+                <TextBox Width="380" Margin="10 5"/>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Grid.Row="3" Orientation="Horizontal">
                 <Label Foreground="White" FontSize="15" Width="155" Margin="10 5">Телефон</Label>
-                <TextBox Width="400" Margin="10 5"/>
+                <TextBox Width="380" Margin="10 5"/>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Grid.Row="4" Orientation="Horizontal">
                 <Label Foreground="White" FontSize="15" Width="155" Margin="10 5">Адрес</Label>
-                <TextBox Width="400" Margin="10 5"/>
+                <TextBox Width="380" Margin="10 5"/>
             </StackPanel>
-                
-        </StackPanel>
+
+        </Grid>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <Label  Foreground="White" FontSize="20" >Навигация</Label>
-        </StackPanel>
-
-        <StackPanel Grid.Row="3" Orientation="Horizontal">
-            <Button Width="380" Margin=" 10 3 10 3" x:Name="AddDeptorsButton" Click="AddDeptorsButton_Click" Content="Добавить должника"/>
+            <Button Width="555" Margin=" 10 3 10 3" x:Name="AddDeptorsButton" Click="AddDeptorsButton_Click" Content="Добавить должника"/>
         </StackPanel>
 
     </Grid>
-</Page>
+</Window>

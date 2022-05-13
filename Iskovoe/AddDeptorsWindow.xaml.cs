@@ -10,22 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Iskovoe.Pages
+namespace Iskovoe
 {
     /// <summary>
-    /// Логика взаимодействия для AddDeptorPage.xaml
+    /// Логика взаимодействия для AddDeptorsWindow.xaml
     /// </summary>
-    public partial class AddDeptorPage : Page
+    public partial class AddDeptorsWindow : Window
     {
-        private MakeIskovoeWindow _window;
-        public AddDeptorPage(MakeIskovoeWindow window)
+        public AddDeptorsWindow()
         {
             InitializeComponent();
-            DataContext = this;
-            _window = window;
         }
 
         private void AddDeptorsButton_Click(object sender, RoutedEventArgs e)

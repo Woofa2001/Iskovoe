@@ -20,12 +20,10 @@ namespace Iskovoe.Pages
     /// </summary>
     public partial class DefinitionDeptorPage : Page
     {
-        public MakeIskovoeWindow _window;
-        public DefinitionDeptorPage(MakeIskovoeWindow window)
+        public DefinitionDeptorPage()
         {
             InitializeComponent();
             DataContext = this;
-            _window = window;
             DataGridDeptors.ItemsSource = SourceCore.DB.Debtors.ToList();
         }
 
@@ -79,7 +77,8 @@ namespace Iskovoe.Pages
 
         private void AddDeptorsButton_Click(object sender, RoutedEventArgs e)
         {
-            _window.MakeIscovoeFrame.Navigate(new Pages.AddDeptorPage(_window));
+            AddDeptorsWindow window = new AddDeptorsWindow();
+            window.ShowDialog();
         }
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
