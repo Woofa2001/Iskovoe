@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Iskovoe"
         mc:Ignorable="d"
-        Title="AddDeptorsWindow" Height="330" Width="590" ResizeMode="NoResize">
+        Title="AddDeptorsWindow" Height="330" Width="590" ResizeMode="NoResize" 
+        WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Window.Resources>
         <LinearGradientBrush x:Key="HeaderBrush" StartPoint="0.5,0" EndPoint="0.5,1">
             <GradientStop Color="#FF6B8E95" Offset="0"/>
@@ -64,9 +65,29 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="45"/>
         </Grid.RowDefinitions>
-
-        <Label Foreground="White" FontSize="20" Grid.Row="0" Margin="10 0 0 0 " >Добавление должника</Label>
-
+        <Grid Grid.Row="0" MouseDown="RowDefinition_MouseDown">
+            <Rectangle Fill="Transparent" Height="40" />
+            <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,5,0,0" Height="40" Orientation="Horizontal" FlowDirection="RightToLeft">
+                <Label Foreground="White" FontSize="19">Название приложения</Label>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,10,0" Height="30" Orientation="Horizontal" FlowDirection="RightToLeft">
+                <Button x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Click="btnClose_Click" Tag="IsCloseButton"/>
+                <Button x:Name="btnRestore" Margin="5,0" Click="btnRestore_Click">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource IconButtonsStyle}">
+                            <Setter Property="Content" Value="{DynamicResource maximize}"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=home, Path=WindowState}" Value="Maximized">
+                                    <Setter Property="Content" Value="{DynamicResource restore}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button x:Name="btnMinimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource minimize}" Click="btnMinimize_Click"/>
+            </StackPanel>
+        </Grid>
+        
         <Grid Grid.Row="1" Margin="0 5 0 5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>

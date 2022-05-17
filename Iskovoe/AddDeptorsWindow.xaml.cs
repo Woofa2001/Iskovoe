@@ -28,5 +28,25 @@ namespace Iskovoe
         {
 
         }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnRestore_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RowDefinition_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }
