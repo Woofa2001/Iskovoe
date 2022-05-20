@@ -118,6 +118,9 @@
     <Compile Include="MakeIskovoeWindow.xaml.cs">
       <DependentUpon>MakeIskovoeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AddProvonorPage.xaml.cs">
+      <DependentUpon>AddProvonorPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\DefinitionDeptorPage.xaml.cs">
       <DependentUpon>DefinitionDeptorPage.xaml</DependentUpon>
     </Compile>
@@ -146,6 +149,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MakeIskovoeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AddProvonorPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,4 +1,4 @@
-﻿<Page x:Class="Iskovoe.Pages.DefinitionDeptorPage"
+﻿<Page x:Class="Iskovoe.Pages.AddProvonorPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Iskovoe.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="DefinitionDeptorPage" Loaded="Page_Loaded">
+      Title="AddProvonorPage">
     <Page.Resources>
         <LinearGradientBrush x:Key="HeaderBrush" StartPoint="0.5,0" EndPoint="0.5,1">
             <GradientStop Color="#FF6B8E95" Offset="0"/>
@@ -52,7 +52,7 @@
             <Setter Property="Foreground" Value="White"/>
         </Style>
     </Page.Resources>
-    
+
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -60,33 +60,29 @@
                 <GradientStop Color="#FF2C7873" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="320"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
-        <Label Foreground="White" FontSize="20" Grid.Row="0" Margin="10 0 0 0 " >Выбор должника</Label>
+        <Label Foreground="White" FontSize="20" Grid.Row="0" Margin="10 0 0 0 " >Добавление правонарушений</Label>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 5 0 5">
-            <ComboBox Name="FilterCombobox" Width="220" Margin="10 1 15 1" SelectionChanged="FilterCombobox_SelectionChanged" />
-            <TextBox x:Name="TextBoxStart" Width="270" Margin="5,1,0,1"  TextChanged="TextBox_TextChanged"></TextBox>
-            <TextBox x:Name="TextBoxEnd" Width="135" Margin="5,1,0,1" TextChanged="TextBoxEnd_TextChanged" Visibility="Hidden" />
-        </StackPanel>
-
-        <DataGrid Name="DataGridDeptors" Grid.Row="2"  ColumnHeaderStyle="{StaticResource HeaderStyle}" RowStyle="{StaticResource RowStyle}" CellStyle="{StaticResource CellStyle}"  AutoGenerateColumns="False" CanUserAddRows="False"  >
+        <DataGrid Name="DataGridDeptors" Grid.RowSpan="3" Grid.Column="1"  ColumnHeaderStyle="{StaticResource HeaderStyle}" RowStyle="{StaticResource RowStyle}" CellStyle="{StaticResource CellStyle}"  AutoGenerateColumns="False" CanUserAddRows="False">
             <DataGrid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF1F1F1F"/>
+                    <GradientStop Color="#FF050E0D"/>
                     <GradientStop Color="#FF2C7873" Offset="1"/>
                 </LinearGradientBrush>
             </DataGrid.Background>
-            <DataGrid.Columns >
+            <DataGrid.Columns>
                 <DataGridTemplateColumn MinWidth="150" Width="*" >
                     <DataGridTemplateColumn.Header>
-                        Должник
+                        Тип формы
                     </DataGridTemplateColumn.Header>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -96,7 +92,7 @@
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Width="*" MinWidth="150">
                     <DataGridTemplateColumn.Header>
-                        ИНН
+                        Тип нарушения
                     </DataGridTemplateColumn.Header>
                     <DataGridTemplateColumn.CellTemplate >
                         <DataTemplate>
@@ -106,7 +102,7 @@
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Width="*" MinWidth="150">
                     <DataGridTemplateColumn.Header>
-                        КПП
+                        Период
                     </DataGridTemplateColumn.Header>
                     <DataGridTemplateColumn.CellTemplate >
                         <DataTemplate>
@@ -114,37 +110,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Width="*" MinWidth="150">
-                    <DataGridTemplateColumn.Header>
-                        Телефон
-                    </DataGridTemplateColumn.Header>
-                    <DataGridTemplateColumn.CellTemplate >
-                        <DataTemplate>
-                            <Label Content="{Binding phone}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Width="*" MinWidth="150">
-                    <DataGridTemplateColumn.Header>
-                        Адрес
-                    </DataGridTemplateColumn.Header>
-                    <DataGridTemplateColumn.CellTemplate >
-                        <DataTemplate>
-                            <Label Content="{Binding adress}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-
-        <StackPanel Grid.Row="3" Orientation="Horizontal">
-            <Label  Foreground="White" FontSize="20" >Навигация</Label>
-        </StackPanel>
-
-        <StackPanel Grid.Row="4" Orientation="Horizontal">
-            <Button Width="380" Margin=" 10 3 10 3" x:Name="AddDeptorsButton" Click="AddDeptorsButton_Click" Content="Добавить должника"/>
-            <Button Width="380" Margin=" 10 3 10 3" x:Name="NextButton" Click="NextButton_Click" Content="Далее"/>
-        </StackPanel>
-
     </Grid>
 </Page>

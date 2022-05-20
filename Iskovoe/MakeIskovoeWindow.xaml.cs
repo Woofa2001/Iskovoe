@@ -22,7 +22,8 @@ namespace Iskovoe
         public MakeIskovoeWindow()
         {
             InitializeComponent();
-            MakeIscovoeFrame.Navigate(new Pages.DefinitionDeptorPage());
+            DataContext = this;
+            MakeIscovoeFrame.Navigate(new Pages.DefinitionDeptorPage(this));
         }
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {

@@ -20,11 +20,13 @@ namespace Iskovoe.Pages
     /// </summary>
     public partial class DefinitionDeptorPage : Page
     {
-        public DefinitionDeptorPage()
+        private MakeIskovoeWindow MakeIskovoeWindow;
+        public DefinitionDeptorPage(MakeIskovoeWindow makeIskovoeWindow)
         {
             InitializeComponent();
             DataContext = this;
             DataGridDeptors.ItemsSource = SourceCore.DB.Debtors.ToList();
+            MakeIskovoeWindow = makeIskovoeWindow;
         }
 
         private void FilterCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -83,7 +85,7 @@ namespace Iskovoe.Pages
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            MakeIskovoeWindow.MakeIscovoeFrame.Navigate(new Pages.AddProvonorPage());
         }
     }
 }
