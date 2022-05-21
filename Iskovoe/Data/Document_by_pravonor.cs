@@ -12,18 +12,15 @@ namespace Iskovoe.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Tip_documents
+    public partial class Document_by_pravonor
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tip_documents()
-        {
-            this.Document_by_pravonor = new HashSet<Document_by_pravonor>();
-        }
+        public int id_doc_prav { get; set; }
+        public Nullable<int> id_pravonor { get; set; }
+        public Nullable<int> id_tip_dop { get; set; }
+        public Nullable<int> num { get; set; }
+        public Nullable<System.DateTime> data_doc { get; set; }
     
-        public int id_tip_dop { get; set; }
-        public string name_tip_dop { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Document_by_pravonor> Document_by_pravonor { get; set; }
+        public virtual Pravonor Pravonor { get; set; }
+        public virtual Tip_documents Tip_documents { get; set; }
     }
 }

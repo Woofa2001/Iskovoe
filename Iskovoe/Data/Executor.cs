@@ -26,7 +26,8 @@ namespace Iskovoe.Data
         public Nullable<int> passport { get; set; }
         public string login { get; set; }
         public string password { get; set; }
-        public byte[] image { get; set; }
+        public string image { get; set; }
+        public string image_format { get; set; }
     
         public virtual Post Post { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

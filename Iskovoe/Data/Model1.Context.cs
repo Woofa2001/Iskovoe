@@ -26,9 +26,10 @@ namespace Iskovoe.Data
         }
     
         public virtual DbSet<Debtors> Debtors { get; set; }
-        public virtual DbSet<Docement_by_pravonor> Docement_by_pravonor { get; set; }
+        public virtual DbSet<Document_by_pravonor> Document_by_pravonor { get; set; }
         public virtual DbSet<Executor> Executor { get; set; }
         public virtual DbSet<Iskovoe> Iskovoe { get; set; }
+        public virtual DbSet<Period> Period { get; set; }
         public virtual DbSet<Post> Post { get; set; }
         public virtual DbSet<Pravonor> Pravonor { get; set; }
         public virtual DbSet<Sostav> Sostav { get; set; }

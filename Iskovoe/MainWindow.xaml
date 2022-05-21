@@ -109,7 +109,7 @@
             <StackPanel Orientation="Horizontal" >
                 <Ellipse Width="38" Height="38" Margin="4" HorizontalAlignment="Left" VerticalAlignment="Top" >
                     <Ellipse.Fill>
-                        <ImageBrush ImageSource="Image/ico-kontakty.png"/>
+                        <ImageBrush x:Name="ImageElipse" ImageSource="Image/ico-kontakty.png"/>
                     </Ellipse.Fill>
                 </Ellipse>
                 <StackPanel x:Name="StackLabel" Visibility="Collapsed">
@@ -117,6 +117,7 @@
                     <Label Foreground="White" FontSize="14" x:Name="INNLabel"></Label>
                     <Label Foreground="White" FontSize="14" x:Name="KppLabel"></Label>
                     <Label Foreground="White" FontSize="14" x:Name="PhoneLabel" ></Label>
+                    <Button Name="test" Click="test_Click" Width="100" Height="30"/>
                 </StackPanel>
             </StackPanel>
             

@@ -16,7 +16,7 @@
           <Property Name="kpp" Type="varchar" MaxLength="9" />
           <Property Name="adress" Type="varchar" MaxLength="70" />
         </EntityType>
-        <EntityType Name="Docement_by_pravonor">
+        <EntityType Name="Document_by_pravonor">
           <Key>
             <PropertyRef Name="id_doc_prav" />
           </Key>
@@ -36,7 +36,8 @@
           <Property Name="passport" Type="int" />
           <Property Name="login" Type="varchar" MaxLength="20" />
           <Property Name="password" Type="varchar" MaxLength="10" />
-          <Property Name="image" Type="image" />
+          <Property Name="image" Type="varchar(max)" />
+          <Property Name="image_format" Type="varchar" MaxLength="5" />
         </EntityType>
         <EntityType Name="Iskovoe">
           <Key>
@@ -46,6 +47,15 @@
           <Property Name="id_dolg" Type="int" />
           <Property Name="id_executor" Type="int" />
           <Property Name="data_iscovoe" Type="date" />
+        </EntityType>
+        <EntityType Name="Period">
+          <Key>
+            <PropertyRef Name="id_period" />
+          </Key>
+          <Property Name="id_period" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="month" Type="int" Nullable="false" />
+          <Property Name="year" Type="int" />
+          <Property Name="last_date" Type="date" />
         </EntityType>
         <EntityType Name="Post">
           <Key>
@@ -62,6 +72,7 @@
           <Property Name="id_iskovoe" Type="int" />
           <Property Name="id_tip_form" Type="int" />
           <Property Name="id_sostav" Type="int" />
+          <Property Name="id_period" Type="int" />
           <Property Name="opis" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="Sostav">
@@ -97,24 +108,24 @@
         </EntityType>
         <Association Name="FK_Docement_by_pravonor_Pravonor">
           <End Role="Pravonor" Type="Self.Pravonor" Multiplicity="0..1" />
-          <End Role="Docement_by_pravonor" Type="Self.Docement_by_pravonor" Multiplicity="*" />
+          <End Role="Document_by_pravonor" Type="Self.Document_by_pravonor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Pravonor">
               <PropertyRef Name="id_pravonor" />
             </Principal>
-            <Dependent Role="Docement_by_pravonor">
+            <Dependent Role="Document_by_pravonor">
               <PropertyRef Name="id_pravonor" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Docement_by_pravonor_Tip_documents">
           <End Role="Tip_documents" Type="Self.Tip_documents" Multiplicity="0..1" />
-          <End Role="Docement_by_pravonor" Type="Self.Docement_by_pravonor" Multiplicity="*" />
+          <End Role="Document_by_pravonor" Type="Self.Document_by_pravonor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tip_documents">
               <PropertyRef Name="id_tip_dop" />
             </Principal>
-            <Dependent Role="Docement_by_pravonor">
+            <Dependent Role="Document_by_pravonor">
               <PropertyRef Name="id_tip_dop" />
             </Dependent>
           </ReferentialConstraint>
@@ -164,6 +175,18 @@
             </Principal>
             <Dependent Role="Pravonor">
               <PropertyRef Name="id_iskovoe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pravonor_Period">
+          <End Role="Period" Type="Self.Period" Multiplicity="0..1" />
+          <End Role="Pravonor" Type="Self.Pravonor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Period">
+              <PropertyRef Name="id_period" />
+            </Principal>
+            <Dependent Role="Pravonor">
+              <PropertyRef Name="id_period" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -193,9 +216,10 @@
         </Association>
         <EntityContainer Name="Хранилище IskovoeModelContainer">
           <EntitySet Name="Debtors" EntityType="Self.Debtors" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Docement_by_pravonor" EntityType="Self.Docement_by_pravonor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Document_by_pravonor" EntityType="Self.Document_by_pravonor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Executor" EntityType="Self.Executor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Iskovoe" EntityType="Self.Iskovoe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Period" EntityType="Self.Period" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pravonor" EntityType="Self.Pravonor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sostav" EntityType="Self.Sostav" Schema="dbo" store:Type="Tables" />
@@ -204,11 +228,11 @@
           <EntitySet Name="Tip_forms" EntityType="Self.Tip_forms" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Docement_by_pravonor_Pravonor" Association="Self.FK_Docement_by_pravonor_Pravonor">
             <End Role="Pravonor" EntitySet="Pravonor" />
-            <End Role="Docement_by_pravonor" EntitySet="Docement_by_pravonor" />
+            <End Role="Document_by_pravonor" EntitySet="Document_by_pravonor" />
           </AssociationSet>
           <AssociationSet Name="FK_Docement_by_pravonor_Tip_documents" Association="Self.FK_Docement_by_pravonor_Tip_documents">
             <End Role="Tip_documents" EntitySet="Tip_documents" />
-            <End Role="Docement_by_pravonor" EntitySet="Docement_by_pravonor" />
+            <End Role="Document_by_pravonor" EntitySet="Document_by_pravonor" />
           </AssociationSet>
           <AssociationSet Name="FK_Executor_Post" Association="Self.FK_Executor_Post">
             <End Role="Post" EntitySet="Post" />
@@ -224,6 +248,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Pravonor_Iskovoe" Association="Self.FK_Pravonor_Iskovoe">
             <End Role="Iskovoe" EntitySet="Iskovoe" />
+            <End Role="Pravonor" EntitySet="Pravonor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pravonor_Period" Association="Self.FK_Pravonor_Period">
+            <End Role="Period" EntitySet="Period" />
             <End Role="Pravonor" EntitySet="Pravonor" />
           </AssociationSet>
           <AssociationSet Name="FK_Pravonor_Sostav" Association="Self.FK_Pravonor_Sostav">
@@ -252,7 +280,7 @@
           <Property Name="adress" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Iskovoe" Relationship="Self.FK_Iskovoe_Debtors2" FromRole="Debtors" ToRole="Iskovoe" />
         </EntityType>
-        <EntityType Name="Docement_by_pravonor">
+        <EntityType Name="Document_by_pravonor">
           <Key>
             <PropertyRef Name="id_doc_prav" />
           </Key>
@@ -261,8 +289,8 @@
           <Property Name="id_tip_dop" Type="Int32" />
           <Property Name="num" Type="Int32" />
           <Property Name="data_doc" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Pravonor" Relationship="Self.FK_Docement_by_pravonor_Pravonor" FromRole="Docement_by_pravonor" ToRole="Pravonor" />
-          <NavigationProperty Name="Tip_documents" Relationship="Self.FK_Docement_by_pravonor_Tip_documents" FromRole="Docement_by_pravonor" ToRole="Tip_documents" />
+          <NavigationProperty Name="Pravonor" Relationship="Self.FK_Docement_by_pravonor_Pravonor" FromRole="Document_by_pravonor" ToRole="Pravonor" />
+          <NavigationProperty Name="Tip_documents" Relationship="Self.FK_Docement_by_pravonor_Tip_documents" FromRole="Document_by_pravonor" ToRole="Tip_documents" />
         </EntityType>
         <EntityType Name="Executor">
           <Key>
@@ -274,7 +302,8 @@
           <Property Name="passport" Type="Int32" />
           <Property Name="login" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="password" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="image_format" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Post" Relationship="Self.FK_Executor_Post" FromRole="Executor" ToRole="Post" />
           <NavigationProperty Name="Iskovoe" Relationship="Self.FK_Iskovoe_Executor" FromRole="Executor" ToRole="Iskovoe" />
         </EntityType>
@@ -289,6 +318,16 @@
           <NavigationProperty Name="Debtors" Relationship="Self.FK_Iskovoe_Debtors2" FromRole="Iskovoe" ToRole="Debtors" />
           <NavigationProperty Name="Executor" Relationship="Self.FK_Iskovoe_Executor" FromRole="Iskovoe" ToRole="Executor" />
           <NavigationProperty Name="Pravonor" Relationship="Self.FK_Pravonor_Iskovoe" FromRole="Iskovoe" ToRole="Pravonor" />
+        </EntityType>
+        <EntityType Name="Period">
+          <Key>
+            <PropertyRef Name="id_period" />
+          </Key>
+          <Property Name="id_period" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="month" Type="Int32" Nullable="false" />
+          <Property Name="year" Type="Int32" />
+          <Property Name="last_date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Pravonor" Relationship="Self.FK_Pravonor_Period" FromRole="Period" ToRole="Pravonor" />
         </EntityType>
         <EntityType Name="Post">
           <Key>
@@ -306,9 +345,11 @@
           <Property Name="id_iskovoe" Type="Int32" />
           <Property Name="id_tip_form" Type="Int32" />
           <Property Name="id_sostav" Type="Int32" />
+          <Property Name="id_period" Type="Int32" />
           <Property Name="opis" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Docement_by_pravonor" Relationship="Self.FK_Docement_by_pravonor_Pravonor" FromRole="Pravonor" ToRole="Docement_by_pravonor" />
+          <NavigationProperty Name="Document_by_pravonor" Relationship="Self.FK_Docement_by_pravonor_Pravonor" FromRole="Pravonor" ToRole="Document_by_pravonor" />
           <NavigationProperty Name="Iskovoe" Relationship="Self.FK_Pravonor_Iskovoe" FromRole="Pravonor" ToRole="Iskovoe" />
+          <NavigationProperty Name="Period" Relationship="Self.FK_Pravonor_Period" FromRole="Pravonor" ToRole="Period" />
           <NavigationProperty Name="Sostav" Relationship="Self.FK_Pravonor_Sostav" FromRole="Pravonor" ToRole="Sostav" />
           <NavigationProperty Name="Tip_forms" Relationship="Self.FK_Pravonor_Tip_forms" FromRole="Pravonor" ToRole="Tip_forms" />
         </EntityType>
@@ -336,7 +377,7 @@
           </Key>
           <Property Name="id_tip_dop" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name_tip_dop" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Docement_by_pravonor" Relationship="Self.FK_Docement_by_pravonor_Tip_documents" FromRole="Tip_documents" ToRole="Docement_by_pravonor" />
+          <NavigationProperty Name="Document_by_pravonor" Relationship="Self.FK_Docement_by_pravonor_Tip_documents" FromRole="Tip_documents" ToRole="Document_by_pravonor" />
         </EntityType>
         <EntityType Name="Tip_forms">
           <Key>
@@ -360,24 +401,24 @@
         </Association>
         <Association Name="FK_Docement_by_pravonor_Pravonor">
           <End Role="Pravonor" Type="Self.Pravonor" Multiplicity="0..1" />
-          <End Role="Docement_by_pravonor" Type="Self.Docement_by_pravonor" Multiplicity="*" />
+          <End Role="Document_by_pravonor" Type="Self.Document_by_pravonor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Pravonor">
               <PropertyRef Name="id_pravonor" />
             </Principal>
-            <Dependent Role="Docement_by_pravonor">
+            <Dependent Role="Document_by_pravonor">
               <PropertyRef Name="id_pravonor" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Docement_by_pravonor_Tip_documents">
           <End Role="Tip_documents" Type="Self.Tip_documents" Multiplicity="0..1" />
-          <End Role="Docement_by_pravonor" Type="Self.Docement_by_pravonor" Multiplicity="*" />
+          <End Role="Document_by_pravonor" Type="Self.Document_by_pravonor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tip_documents">
               <PropertyRef Name="id_tip_dop" />
             </Principal>
-            <Dependent Role="Docement_by_pravonor">
+            <Dependent Role="Document_by_pravonor">
               <PropertyRef Name="id_tip_dop" />
             </Dependent>
           </ReferentialConstraint>
@@ -418,6 +459,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Pravonor_Period">
+          <End Role="Period" Type="Self.Period" Multiplicity="0..1" />
+          <End Role="Pravonor" Type="Self.Pravonor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Period">
+              <PropertyRef Name="id_period" />
+            </Principal>
+            <Dependent Role="Pravonor">
+              <PropertyRef Name="id_period" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Pravonor_Sostav">
           <End Role="Sostav" Type="Self.Sostav" Multiplicity="0..1" />
           <End Role="Pravonor" Type="Self.Pravonor" Multiplicity="*" />
@@ -444,9 +497,10 @@
         </Association>
         <EntityContainer Name="IskovoeEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Debtors" EntityType="Self.Debtors" />
-          <EntitySet Name="Docement_by_pravonor" EntityType="Self.Docement_by_pravonor" />
+          <EntitySet Name="Document_by_pravonor" EntityType="Self.Document_by_pravonor" />
           <EntitySet Name="Executor" EntityType="Self.Executor" />
           <EntitySet Name="Iskovoe" EntityType="Self.Iskovoe" />
+          <EntitySet Name="Period" EntityType="Self.Period" />
           <EntitySet Name="Post" EntityType="Self.Post" />
           <EntitySet Name="Pravonor" EntityType="Self.Pravonor" />
           <EntitySet Name="Sostav" EntityType="Self.Sostav" />
@@ -459,11 +513,11 @@
           </AssociationSet>
           <AssociationSet Name="FK_Docement_by_pravonor_Pravonor" Association="Self.FK_Docement_by_pravonor_Pravonor">
             <End Role="Pravonor" EntitySet="Pravonor" />
-            <End Role="Docement_by_pravonor" EntitySet="Docement_by_pravonor" />
+            <End Role="Document_by_pravonor" EntitySet="Document_by_pravonor" />
           </AssociationSet>
           <AssociationSet Name="FK_Docement_by_pravonor_Tip_documents" Association="Self.FK_Docement_by_pravonor_Tip_documents">
             <End Role="Tip_documents" EntitySet="Tip_documents" />
-            <End Role="Docement_by_pravonor" EntitySet="Docement_by_pravonor" />
+            <End Role="Document_by_pravonor" EntitySet="Document_by_pravonor" />
           </AssociationSet>
           <AssociationSet Name="FK_Executor_Post" Association="Self.FK_Executor_Post">
             <End Role="Post" EntitySet="Post" />
@@ -475,6 +529,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Pravonor_Iskovoe" Association="Self.FK_Pravonor_Iskovoe">
             <End Role="Iskovoe" EntitySet="Iskovoe" />
+            <End Role="Pravonor" EntitySet="Pravonor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pravonor_Period" Association="Self.FK_Pravonor_Period">
+            <End Role="Period" EntitySet="Period" />
             <End Role="Pravonor" EntitySet="Pravonor" />
           </AssociationSet>
           <AssociationSet Name="FK_Pravonor_Sostav" Association="Self.FK_Pravonor_Sostav">
@@ -504,9 +562,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Docement_by_pravonor">
-            <EntityTypeMapping TypeName="IskovoeModel.Docement_by_pravonor">
-              <MappingFragment StoreEntitySet="Docement_by_pravonor">
+          <EntitySetMapping Name="Document_by_pravonor">
+            <EntityTypeMapping TypeName="IskovoeModel.Document_by_pravonor">
+              <MappingFragment StoreEntitySet="Document_by_pravonor">
                 <ScalarProperty Name="id_doc_prav" ColumnName="id_doc_prav" />
                 <ScalarProperty Name="id_pravonor" ColumnName="id_pravonor" />
                 <ScalarProperty Name="id_tip_dop" ColumnName="id_tip_dop" />
@@ -525,6 +583,7 @@
                 <ScalarProperty Name="login" ColumnName="login" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="image_format" ColumnName="image_format" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -535,6 +594,16 @@
                 <ScalarProperty Name="id_dolg" ColumnName="id_dolg" />
                 <ScalarProperty Name="id_executor" ColumnName="id_executor" />
                 <ScalarProperty Name="data_iscovoe" ColumnName="data_iscovoe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Period">
+            <EntityTypeMapping TypeName="IskovoeModel.Period">
+              <MappingFragment StoreEntitySet="Period">
+                <ScalarProperty Name="id_period" ColumnName="id_period" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="last_date" ColumnName="last_date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -553,6 +622,7 @@
                 <ScalarProperty Name="id_iskovoe" ColumnName="id_iskovoe" />
                 <ScalarProperty Name="id_tip_form" ColumnName="id_tip_form" />
                 <ScalarProperty Name="id_sostav" ColumnName="id_sostav" />
+                <ScalarProperty Name="id_period" ColumnName="id_period" />
                 <ScalarProperty Name="opis" ColumnName="opis" />
               </MappingFragment>
             </EntityTypeMapping>

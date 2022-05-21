@@ -12,15 +12,20 @@ namespace Iskovoe.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Docement_by_pravonor
+    public partial class Period
     {
-        public int id_doc_prav { get; set; }
-        public Nullable<int> id_pravonor { get; set; }
-        public Nullable<int> id_tip_dop { get; set; }
-        public Nullable<int> num { get; set; }
-        public Nullable<System.DateTime> data_doc { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Period()
+        {
+            this.Pravonor = new HashSet<Pravonor>();
+        }
     
-        public virtual Pravonor Pravonor { get; set; }
-        public virtual Tip_documents Tip_documents { get; set; }
+        public int id_period { get; set; }
+        public int month { get; set; }
+        public Nullable<int> year { get; set; }
+        public Nullable<System.DateTime> last_date { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Pravonor> Pravonor { get; set; }
     }
 }

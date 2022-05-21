@@ -4,23 +4,25 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="adcb5128f0b446dc9d9894feeb4ee4f8" Name="Diagram1">
-        <EntityTypeShape EntityType="IskovoeModel.Debtors" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="IskovoeModel.Docement_by_pravonor" Width="1.5" PointX="9.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="IskovoeModel.Executor" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="IskovoeModel.Iskovoe" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="IskovoeModel.Post" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+      <Diagram DiagramId="81b707dd97ae458380d8fa2ec174469b" Name="Diagram1">
+        <EntityTypeShape EntityType="IskovoeModel.Debtors" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IskovoeModel.Document_by_pravonor" Width="1.5" PointX="9.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IskovoeModel.Executor" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IskovoeModel.Iskovoe" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="IskovoeModel.Period" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IskovoeModel.Post" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="IskovoeModel.Pravonor" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="IskovoeModel.Sostav" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IskovoeModel.Sostav" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
         <EntityTypeShape EntityType="IskovoeModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="IskovoeModel.Tip_documents" Width="1.5" PointX="7.5" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="IskovoeModel.Tip_forms" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="IskovoeModel.Tip_documents" Width="1.5" PointX="7.5" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IskovoeModel.Tip_forms" Width="1.5" PointX="5.25" PointY="10.375" IsExpanded="true" />
         <AssociationConnector Association="IskovoeModel.FK_Iskovoe_Debtors2" ManuallyRouted="false" />
         <AssociationConnector Association="IskovoeModel.FK_Docement_by_pravonor_Pravonor" ManuallyRouted="false" />
         <AssociationConnector Association="IskovoeModel.FK_Docement_by_pravonor_Tip_documents" ManuallyRouted="false" />
         <AssociationConnector Association="IskovoeModel.FK_Executor_Post" ManuallyRouted="false" />
         <AssociationConnector Association="IskovoeModel.FK_Iskovoe_Executor" ManuallyRouted="false" />
         <AssociationConnector Association="IskovoeModel.FK_Pravonor_Iskovoe" ManuallyRouted="false" />
+        <AssociationConnector Association="IskovoeModel.FK_Pravonor_Period" ManuallyRouted="false" />
         <AssociationConnector Association="IskovoeModel.FK_Pravonor_Sostav" ManuallyRouted="false" />
         <AssociationConnector Association="IskovoeModel.FK_Pravonor_Tip_forms" ManuallyRouted="false" />
       </Diagram>

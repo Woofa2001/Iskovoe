@@ -44,6 +44,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
@@ -73,7 +74,7 @@
     <Compile Include="Data\Debtors.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\Docement_by_pravonor.cs">
+    <Compile Include="Data\Document_by_pravonor.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\Executor.cs">
@@ -96,6 +97,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Period.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\Post.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -207,6 +211,13 @@
     <Resource Include="Image\Image.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Image\photoroom.png" />
+    <Resource Include="Image\gerb.jpg" />
+    <Resource Include="Image\eye.png" />
+    <Resource Include="Image\avatar.jpg" />
+    <Resource Include="Image\ico-kontakty.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Data\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -217,12 +228,6 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
-    <Resource Include="Image\photoroom.png" />
-    <Resource Include="Image\gerb.jpg" />
-    <Resource Include="Image\eye.png" />
-    <Resource Include="Image\avatar.jpg" />
-    <Resource Include="Image\ico-kontakty.png" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
