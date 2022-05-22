@@ -16,6 +16,7 @@ using System.IO;
 using System.Data;
 using System.Drawing;
 using System.Data.SqlClient;
+using Microsoft.Win32;
 
 
 namespace Iskovoe
@@ -27,6 +28,7 @@ namespace Iskovoe
     {
         public int buf_id;
         public string ImagePath;
+        public string DataSource = @"HOME-PC\SQLEXPRESS"; // Соединение
         public MainWindow(int id)
         {
             InitializeComponent();
@@ -61,10 +63,10 @@ namespace Iskovoe
             {
                 KppLabel.Content = SourceCore.DB.Executor.ToList()[buf_id-1].passport.ToString();
             }
-            if (SourceCore.DB.Executor.ToList()[buf_id-1].image != null)
-            {
-                PhoneLabel.Content = SourceCore.DB.Executor.ToList()[buf_id-1].image.ToString();
-            }
+            //if (SourceCore.DB.Executor.ToList()[buf_id-1].image != null)
+            //{
+            //    PhoneLabel.Content = SourceCore.DB.Executor.ToList()[buf_id-1].image.ToString();
+            //}
         }
 
         private void FilterCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -165,7 +167,7 @@ namespace Iskovoe
             Close();
         }
 
-        private static void PutImageBase64InDb(string iFile)
+        private void PutImageBase64InDb(string iFile)
         {
             // конвертация изображения в base64
             string base64String = null;
@@ -183,9 +185,9 @@ namespace Iskovoe
             string iImageExtension = (System.IO.Path.GetExtension(iFile)).Replace(".", "").ToLower();
 
             // запись изображения в БД
-            using (SqlConnection sqlConnection = new SqlConnection(@"Data Source=HOME-PC\SQLEXPRESS; Initial Catalog=Iskovoe; Integrated Security=True")) // строка подключения к БД
+            using (SqlConnection sqlConnection = new SqlConnection(@"Data Source=" + DataSource + "; Initial Catalog=Iskovoe; Integrated Security=True")) // строка подключения к БД
             {
-                string commandText = "INSERT INTO EXECUTOR (image, image_format) VALUES(@image, @image_format)"; // запрос на вставку
+                string commandText = "UPDATE EXECUTOR SET image = @image, image_format = @image_format WHERE id_executor = " + buf_id; // запрос на вставку
                 SqlCommand command = new SqlCommand(commandText, sqlConnection);
                 command.Parameters.AddWithValue("@image", base64String); // записываем само изображение
                 command.Parameters.AddWithValue("@image_format", iImageExtension); // записываем расширение изображения
@@ -200,12 +202,12 @@ namespace Iskovoe
             // получаем данные их БД
             List<string> iScreen = new List<string>(); // сделав запрос к БД мы получим множество строк в ответе, поэтому мы их сможем загнать в массив/List
             List<string> iScreen_format = new List<string>();
-            using (SqlConnection sqlConnection = new SqlConnection(@"Data Source=HOME-PC\SQLEXPRESS; Initial Catalog=Iskovoe; Integrated Security=True"))
+            using (SqlConnection sqlConnection = new SqlConnection(@"Data Source=" + DataSource + "; Initial Catalog=Iskovoe; Integrated Security=True"))
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand();
                 sqlCommand.Connection = sqlConnection;
-                sqlCommand.CommandText = @"SELECT [image], [image_format] FROM [EXECUTOR] WHERE [id_executor] = 5"; // наша запись в БД под id=1, поэтому в запросе "WHERE [id] = 1"
+                sqlCommand.CommandText = @"SELECT [image], [image_format] FROM [EXECUTOR] WHERE [id_executor] =" + buf_id; // наша запись в БД под id=1, поэтому в запросе "WHERE [id] = 1"
                 SqlDataReader sqlReader = sqlCommand.ExecuteReader();
                 string iTrimText = null;
                 while (sqlReader.Read()) // считываем и вносим в лист результаты
@@ -234,8 +236,25 @@ namespace Iskovoe
 
         private void test_Click(object sender, RoutedEventArgs e)
         {
-            PutImageBase64InDb(@"C:\2.jpg"); // запись изображения в БД
-            GetImageBase64FromDb();
+            var fileContent = string.Empty;
+            var filePath = string.Empty;
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg;*.gif;)|*.png;*.jpeg;*.jpg;*.gif";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                filePath = File.ReadAllText(openFileDialog.FileName);
+
+                var fileStream = openFileDialog.OpenFile();
+
+                using (StreamReader reader = new StreamReader(fileStream))
+                {
+                    fileContent = reader.ReadToEnd();
+                }
+            }
+            if (filePath != "") {
+                PutImageBase64InDb(filePath); // запись изображения в БД
+                GetImageBase64FromDb();
+            }
         }
     }
 }
