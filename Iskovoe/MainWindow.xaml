@@ -117,7 +117,7 @@
                     <Label Foreground="White" FontSize="14" x:Name="INNLabel"></Label>
                     <Label Foreground="White" FontSize="14" x:Name="KppLabel"></Label>
                     <Label Foreground="White" FontSize="14" x:Name="PhoneLabel" ></Label>
-                    <Button Name="test" Click="test_Click" Width="100" Height="30"/>
+                    <Button Name="test" Click="test_Click" Width="100" Height="30" Content="Добавить картинку"/>
                 </StackPanel>
             </StackPanel>
             

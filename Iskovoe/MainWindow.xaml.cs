@@ -180,10 +180,8 @@ namespace Iskovoe
                     base64String = Convert.ToBase64String(imageBytes);
                 }
             }
-
             // получение расширения файла изображения не забыв удалить точку перед расширением
             string iImageExtension = (System.IO.Path.GetExtension(iFile)).Replace(".", "").ToLower();
-
             // запись изображения в БД
             using (SqlConnection sqlConnection = new SqlConnection(@"Data Source=" + DataSource + "; Initial Catalog=Iskovoe; Integrated Security=True")) // строка подключения к БД
             {
@@ -236,25 +234,26 @@ namespace Iskovoe
 
         private void test_Click(object sender, RoutedEventArgs e)
         {
-            var fileContent = string.Empty;
-            var filePath = string.Empty;
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg;*.gif;)|*.png;*.jpeg;*.jpg;*.gif";
-            if (openFileDialog.ShowDialog() == true)
-            {
-                filePath = File.ReadAllText(openFileDialog.FileName);
+            //var fileContent = string.Empty;
+            //var filePath = string.Empty;
+            //OpenFileDialog openFileDialog = new OpenFileDialog();
+            //openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg;*.gif;)|*.png;*.jpeg;*.jpg;*.gif";
+            //if (openFileDialog.ShowDialog() == true)
+            //{
+            //    filePath = File.ReadAllText(openFileDialog.FileName);
 
-                var fileStream = openFileDialog.OpenFile();
+            //    var fileStream = openFileDialog.OpenFile();
 
-                using (StreamReader reader = new StreamReader(fileStream))
-                {
-                    fileContent = reader.ReadToEnd();
-                }
-            }
-            if (filePath != "") {
-                PutImageBase64InDb(filePath); // запись изображения в БД
+            //    using (StreamReader reader = new StreamReader(fileStream))
+            //    {
+            //        fileContent = reader.ReadToEnd();
+            //    }
+            //}
+            //if (filePath != "") {
+                PutImageBase64InDb(@"C:\2.jpg"); // запись изображения в БД
                 GetImageBase64FromDb();
-            }
+            MessageBox.Show("Картинка добавлена");
+            //}
         }
     }
 }
