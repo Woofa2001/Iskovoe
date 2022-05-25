@@ -35,7 +35,7 @@
             </StackPanel>
         </Grid>
 
-        <Image Margin="15" Source="image/gerb.jpg" Width="100" Height="100" Grid.Row="1" HorizontalAlignment="Left"/>
+        <Image Margin="15" Source="image/photoroom.png" Width="100" Height="100" Grid.Row="1" HorizontalAlignment="Left"/>
 
         <DockPanel Grid.Row="1" Grid.Column="1" >
             <StackPanel Margin="10,15,20,0">

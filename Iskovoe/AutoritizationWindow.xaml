@@ -56,7 +56,7 @@
 
                 <DockPanel Height="30" Margin="0,14,0,0" LastChildFill="False" >
 
-                    <Button x:Name="OkButton" Content="ОК" Width="85" 
+                    <Button x:Name="OkButton" Content="Войти" Width="85" 
                             DockPanel.Dock="Right" TabIndex="7" IsDefault="True"
                             Click="OkButton_Click"/>
                     <Button x:Name="CancelButton" Content="Отмена" Width="85"

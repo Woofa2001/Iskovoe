@@ -87,7 +87,7 @@
             <TextBox PreviewTextInput="TextBox_PreviewTextInput" Height="35" Margin="5"></TextBox>
         </StackPanel>
 
-        <Label Foreground="White" FontSize="20" Grid.Column="1" Grid.Row="0" Margin="10 0 0 0 " >Список добавленных правонарушений</Label>
+        <Label Foreground="White" FontSize="20" Grid.Column="1" Grid.Row="0" Margin="10 0 0 0 ">Список добавленных правонарушений</Label>
         <DataGrid Name="DataGridDeptors" Grid.Row="1"  Grid.Column="1"  ColumnHeaderStyle="{StaticResource HeaderStyle}" RowStyle="{StaticResource RowStyle}" CellStyle="{StaticResource CellStyle}"  AutoGenerateColumns="False" CanUserAddRows="False" Margin="2">
             <DataGrid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
