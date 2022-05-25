@@ -73,7 +73,7 @@
 
         <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Vertical">
             <Label Foreground="White" FontSize="15" Height="35" Margin="5">Тип формы</Label>
-            <ComboBox Height="35" Margin="5"/>
+            <ComboBox x:Name="TipFormComboBox" Height="35" Margin="5"  ItemsSource="{Binding Path=Tip_forms}"/>
             <Label Foreground="White" FontSize="15" Height="35" Margin="5">Состав нарушения</Label>
             <ComboBox Height="35" Margin="5"/>
             <Label Foreground="White" FontSize="15" Height="35" Margin="5">Период</Label>
@@ -81,7 +81,7 @@
                 <Label Foreground="White" FontSize="15" Margin="0 0 7 0">Месяц</Label>
                 <ComboBox MinWidth="175" Margin="0 0 7 0" />
                 <Label Foreground="White" FontSize="15" Margin="0 0 7 0">Год</Label>
-                <TextBox MinWidth="100"/>
+                <TextBox MinWidth="100" PreviewTextInput="TextBox_PreviewTextInput"/>
             </StackPanel>
             <Label Foreground="White" FontSize="15" Margin="5" Height="35">Сумма</Label>
             <TextBox PreviewTextInput="TextBox_PreviewTextInput" Height="35" Margin="5"></TextBox>

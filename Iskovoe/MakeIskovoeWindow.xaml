@@ -41,6 +41,6 @@
             </StackPanel>
         </Grid>
         
-        <Frame x:Name="MakeIscovoeFrame" Grid.Row="1"/>
+        <Frame x:Name="MakeIscovoeFrame" Grid.Row="1" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

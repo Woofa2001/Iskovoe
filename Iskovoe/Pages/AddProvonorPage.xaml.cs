@@ -24,6 +24,7 @@ namespace Iskovoe.Pages
         public AddProvonorPage()
         {
             InitializeComponent();
+            TipFormComboBox.ItemsSource = SourceCore.DB.Tip_forms.ToList();
         }
 
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
