@@ -63,10 +63,7 @@ namespace Iskovoe
             {
                 KppLabel.Content = SourceCore.DB.Executor.ToList()[buf_id-1].passport.ToString();
             }
-            //if (SourceCore.DB.Executor.ToList()[buf_id-1].image != null)
-            //{
-            //    PhoneLabel.Content = SourceCore.DB.Executor.ToList()[buf_id-1].image.ToString();
-            //}
+            GetImageBase64FromDb();
         }
 
         private void FilterCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -228,6 +225,9 @@ namespace Iskovoe
             if (iImageExtension == "png") { newImage.Save(iImageName, System.Drawing.Imaging.ImageFormat.Png); }
             else if (iImageExtension == "jpg" || iImageExtension == "jpeg") { newImage.Save(iImageName, System.Drawing.Imaging.ImageFormat.Jpeg); }
             else if (iImageExtension == "gif") { newImage.Save(iImageName, System.Drawing.Imaging.ImageFormat.Gif); }
+            ImageBrush imageBrush = new ImageBrush();
+            imageBrush.ImageSource = new BitmapImage(new Uri(iImageName,UriKind.Relative));
+            ImageElipse.Fill = imageBrush;
             //ImageElipse.ImageSource = iImageName;
             //ImageElipse.ImageSource = New BitmapImage(New Uri(iImageName, UriKind.Relative))
         }

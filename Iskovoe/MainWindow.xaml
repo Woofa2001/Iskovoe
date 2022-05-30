@@ -107,9 +107,9 @@
             </Grid.RowDefinitions>
             
             <StackPanel Orientation="Horizontal" >
-                <Ellipse Width="38" Height="38" Margin="4" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                <Ellipse x:Name="ImageElipse" Width="38" Height="38" Margin="4" HorizontalAlignment="Left" VerticalAlignment="Top" >
                     <Ellipse.Fill>
-                        <ImageBrush x:Name="ImageElipse" ImageSource="Image/ico-kontakty.png"/>
+                        <ImageBrush ImageSource="Image/ico-kontakty.png"/>
                     </Ellipse.Fill>
                 </Ellipse>
                 <StackPanel x:Name="StackLabel" Visibility="Collapsed">

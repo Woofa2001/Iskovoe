@@ -25,6 +25,7 @@ namespace Iskovoe.Pages
         {
             InitializeComponent();
             TipFormComboBox.ItemsSource = SourceCore.DB.Tip_forms.ToList();
+            SostavComboBox.ItemsSource = SourceCore.DB.Sostav.ToList();
         }
 
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)

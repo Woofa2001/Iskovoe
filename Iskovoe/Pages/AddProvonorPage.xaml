@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Iskovoe.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="480" d:DesignWidth="800"
       Title="AddProvonorPage">
     <Page.Resources>
         <LinearGradientBrush x:Key="HeaderBrush" StartPoint="0.5,0" EndPoint="0.5,1">
@@ -72,19 +72,19 @@
         <Label Foreground="White" FontSize="20" Grid.Row="0" Grid.Column="0" Margin="10 0 0 0 " >Добавление правонарушений</Label>
 
         <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Vertical">
-            <Label Foreground="White" FontSize="15" Height="35" Margin="5">Тип формы</Label>
-            <ComboBox x:Name="TipFormComboBox" Height="35" Margin="5"  ItemsSource="{Binding Path=Tip_forms}"/>
-            <Label Foreground="White" FontSize="15" Height="35" Margin="5">Состав нарушения</Label>
-            <ComboBox Height="35" Margin="5"/>
-            <Label Foreground="White" FontSize="15" Height="35" Margin="5">Период</Label>
-            <StackPanel Orientation="Horizontal" Height="35" Margin="5">
-                <Label Foreground="White" FontSize="15" Margin="0 0 7 0">Месяц</Label>
+            <Label Foreground="White" FontSize="18" Height="40" Margin="5">Тип формы</Label>
+            <ComboBox x:Name="TipFormComboBox" Height="40" Margin="5" DisplayMemberPath="name_tip_form"/>
+            <Label Foreground="White" FontSize="18" Height="40" Margin="5">Состав нарушения</Label>
+            <ComboBox x:Name="SostavComboBox" Height="40" Margin="5" DisplayMemberPath="name_sostav"/>
+            <Label Foreground="White" FontSize="18" Height="40" Margin="5">Период</Label>
+            <StackPanel Orientation="Horizontal" Height="40" Margin="5">
+                <Label Foreground="White" FontSize="18" Margin="0 0 7 0">Месяц</Label>
                 <ComboBox MinWidth="175" Margin="0 0 7 0" />
-                <Label Foreground="White" FontSize="15" Margin="0 0 7 0">Год</Label>
+                <Label Foreground="White" FontSize="18" Margin="0 0 7 0">Год</Label>
                 <TextBox MinWidth="100" PreviewTextInput="TextBox_PreviewTextInput"/>
             </StackPanel>
-            <Label Foreground="White" FontSize="15" Margin="5" Height="35">Сумма</Label>
-            <TextBox PreviewTextInput="TextBox_PreviewTextInput" Height="35" Margin="5"></TextBox>
+            <Label Foreground="White" FontSize="18" Margin="5" Height="40">Сумма</Label>
+            <TextBox PreviewTextInput="TextBox_PreviewTextInput" Height="40" Margin="5"></TextBox>
         </StackPanel>
 
         <Label Foreground="White" FontSize="20" Grid.Column="1" Grid.Row="0" Margin="10 0 0 0 ">Список добавленных правонарушений</Label>
