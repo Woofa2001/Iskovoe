@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Iskovoe"
         mc:Ignorable="d"
         Title="Главное окно" Height="450" Width="900" FontSize="13" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize">
-    <Window.Resources> 
+    <Window.Resources>
         <LinearGradientBrush x:Key="HeaderBrush" StartPoint="0.5,0" EndPoint="0.5,1">
             <GradientStop Color="#FF6B8E95" Offset="0"/>
             <GradientStop Color="#FF14A7C1" Offset="1"/>
@@ -92,7 +92,7 @@
                 <Button x:Name="btnMinimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource minimize}" Click="btnMinimize_Click"/>
             </StackPanel>
         </Grid>
-        
+
         <Rectangle x:Name="Rectangle" Fill="Gray" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Width="3"/>
 
         <StackPanel  Grid.Column="2" Grid.Row="1" Orientation="Horizontal" Margin="0 5 0 5">
@@ -105,22 +105,35 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            
-            <StackPanel Orientation="Horizontal" >
-                <Ellipse x:Name="ImageElipse" Width="38" Height="38" Margin="4" HorizontalAlignment="Left" VerticalAlignment="Top" >
-                    <Ellipse.Fill>
-                        <ImageBrush ImageSource="Image/ico-kontakty.png"/>
-                    </Ellipse.Fill>
-                </Ellipse>
-                <StackPanel x:Name="StackLabel" Visibility="Collapsed">
-                    <Label Foreground="White" FontSize="14" x:Name="NameLabel"></Label>
-                    <Label Foreground="White" FontSize="14" x:Name="INNLabel"></Label>
-                    <Label Foreground="White" FontSize="14" x:Name="KppLabel"></Label>
-                    <Label Foreground="White" FontSize="14" x:Name="PhoneLabel" ></Label>
-                    <Button Name="test" Click="test_Click" Width="100" Height="30" Content="Добавить картинку"/>
+
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <Ellipse x:Name="ImageElipse" Width="38" Height="38" Margin="4" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="Image/ico-kontakty.png"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <StackPanel x:Name="StackLabel" Visibility="Collapsed">
+                        <Label Foreground="White" FontSize="14" x:Name="NameLabel"></Label>
+                        <Label Foreground="White" FontSize="14" x:Name="INNLabel"></Label>
+                        <Label Foreground="White" FontSize="14" x:Name="KppLabel"></Label>
+                        <Label Foreground="White" FontSize="14" x:Name="PhoneLabel" ></Label>
+                        <Button Name="test" Click="test_Click" Width="150" Height="30" Content="Изменить картинку"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Ellipse x:Name="ImageElipseOrganization" Width="38" Height="38" Margin="4" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="Image/pfr.jpg"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <StackPanel x:Name="Stack1Label" Visibility="Collapsed">
+                        <Label Foreground="White" FontSize="14">Пенсионный фонд России</Label>
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
-            
+
             <ToggleButton x:Name="Preview" Height="40" Margin="3" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="40" Click="Preview_Click" Style="{StaticResource MenuIconStyle}">
                 <ToggleButton.Triggers>
                     <EventTrigger RoutedEvent="ToggleButton.Unchecked">
@@ -142,7 +155,7 @@
                 </ToggleButton.Triggers>
             </ToggleButton>
         </Grid>
-        
+
         <DataGrid Name="DataGridIscovoe" Grid.Column="2" Grid.Row="2"  ColumnHeaderStyle="{StaticResource HeaderStyle}" RowStyle="{StaticResource RowStyle}" CellStyle="{StaticResource CellStyle}"  AutoGenerateColumns="False" CanUserAddRows="False"  >
             <DataGrid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -175,7 +188,7 @@
         </DataGrid>
         <StackPanel   Orientation="Vertical"  Grid.Column="2" Grid.Row="3">
             <StackPanel Height="35" Orientation="Horizontal">
-                <Label Foreground="White"> Дополнительная навигация</Label>
+                <Label Foreground="White">Дополнительная навигация</Label>
             </StackPanel>
             <Button Margin="15 0 15 0" Height="35" Content="Подготовить исковое заявление" Click="Button_Click"/>
         </StackPanel>

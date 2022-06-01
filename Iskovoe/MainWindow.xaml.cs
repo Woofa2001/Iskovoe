@@ -132,6 +132,7 @@ namespace Iskovoe
         private void Preview_Click(object sender, RoutedEventArgs e)
         {
             if (StackLabel.Visibility == Visibility.Visible) StackLabel.Visibility = Visibility.Collapsed; else StackLabel.Visibility = Visibility.Visible;
+            if (Stack1Label.Visibility == Visibility.Visible) Stack1Label.Visibility = Visibility.Collapsed; else Stack1Label.Visibility = Visibility.Visible;
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
