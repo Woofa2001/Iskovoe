@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Iskovoe.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="480" d:DesignWidth="800"
+      d:DesignHeight="650" d:DesignWidth="800"
       Title="AddProvonorPage">
     <Page.Resources>
         <LinearGradientBrush x:Key="HeaderBrush" StartPoint="0.5,0" EndPoint="0.5,1">
@@ -84,7 +84,11 @@
                 <TextBox MinWidth="100" PreviewTextInput="TextBox_PreviewTextInput"/>
             </StackPanel>
             <Label Foreground="White" FontSize="18" Margin="5" Height="40">Сумма</Label>
-            <TextBox PreviewTextInput="TextBox_PreviewTextInput" Height="40" Margin="5"></TextBox>
+            <TextBox PreviewTextInput="TextBox_PreviewTextInput" Height="40" Margin="5"/>
+            <Label Foreground="White" FontSize="18" Margin="5" Height="40">Срок сдачи</Label>
+            <DatePicker Height="40" Margin="5"/>
+            <Button Height="35" Margin="10 3 10 3" x:Name="AddPravonorButton" Click="AddPravonorButton_Click" Content="Добавить правонарушение"/>
+            <Button Height="35" Margin="10 3 10 3" x:Name="NextButton" Click="NextButton_Click" Content="Сформировать документ"/>
         </StackPanel>
 
         <Label Foreground="White" FontSize="20" Grid.Column="1" Grid.Row="0" Margin="10 0 0 0 ">Список добавленных правонарушений</Label>
