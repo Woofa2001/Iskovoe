@@ -106,7 +106,7 @@
             <StackPanel Grid.Row="3" Orientation="Horizontal">
                 <Label Foreground="White" FontSize="15" Width="155" Margin="10 5">Телефон</Label>
                 <TextBox Name="PhoneTextBox" Width="380" Margin="10 5" />
-                <!--<TextBox extensions:TextBoxMask.Mask="+1999-9999"/>-->
+                <!--<TextBox extensions:TextBoxMask.Mask="+7999-9999"/>-->
             </StackPanel>
 
             <StackPanel Grid.Row="4" Orientation="Horizontal">
