@@ -22,11 +22,13 @@ namespace Iskovoe.Pages
     /// </summary>
     public partial class AddProvonorPage : System.Windows.Controls.Page
     {
-        public AddProvonorPage()
+        public int buf_id;
+        public AddProvonorPage(int buf_id_iscovoe)
         {
             InitializeComponent();
             TipFormComboBox.ItemsSource = SourceCore.DB.Tip_forms.ToList();
             SostavComboBox.ItemsSource = SourceCore.DB.Sostav.ToList();
+            buf_id = buf_id_iscovoe;
         }
 
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -37,6 +39,7 @@ namespace Iskovoe.Pages
 
         private void AddPravonorButton_Click(object sender, RoutedEventArgs e)
         {
+            //var 
 
         }
 

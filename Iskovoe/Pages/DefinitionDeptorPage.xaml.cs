@@ -85,7 +85,17 @@ namespace Iskovoe.Pages
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            MakeIskovoeWindow.MakeIscovoeFrame.Navigate(new Pages.AddProvonorPage());
+            if (DataGridDeptors.SelectedItem == null)
+            {
+                var A = new Data.Iskovoe();
+                A.Debtors = (Data.Debtors)DataGridDeptors.SelectedItem;
+                int buf_id_iscovoe = A.id_iskovoe;
+                MakeIskovoeWindow.MakeIscovoeFrame.Navigate(new Pages.AddProvonorPage(buf_id_iscovoe));
+            } 
+            else 
+            {
+                MessageBox.Show("Выберите должника");
+            }
         }
     }
 }
