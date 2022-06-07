@@ -20,8 +20,9 @@ namespace Iskovoe.Pages
     /// </summary>
     public partial class DefinitionDeptorPage : Page
     {
+        public int id_executor;
         private MakeIskovoeWindow MakeIskovoeWindow;
-        public DefinitionDeptorPage(MakeIskovoeWindow makeIskovoeWindow)
+        public DefinitionDeptorPage(MakeIskovoeWindow makeIskovoeWindow, int id_executor)
         {
             InitializeComponent();
             DataContext = this;
@@ -85,10 +86,14 @@ namespace Iskovoe.Pages
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            if (DataGridDeptors.SelectedItem == null)
+            if (DataGridDeptors.SelectedItem != null)
             {
                 var A = new Data.Iskovoe();
+                A.id_executor = id_executor+1;
                 A.Debtors = (Data.Debtors)DataGridDeptors.SelectedItem;
+                SourceCore.DB.Iskovoe.Add(A);
+                // Сохранение изменений
+                SourceCore.DB.SaveChanges();
                 int buf_id_iscovoe = A.id_iskovoe;
                 MakeIskovoeWindow.MakeIscovoeFrame.Navigate(new Pages.AddProvonorPage(buf_id_iscovoe));
             } 

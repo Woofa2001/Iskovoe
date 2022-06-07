@@ -160,7 +160,7 @@ namespace Iskovoe
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MakeIskovoeWindow window = new MakeIskovoeWindow();
+            MakeIskovoeWindow window = new MakeIskovoeWindow(buf_id);
             window.Show();
             Close();
         }

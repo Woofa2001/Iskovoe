@@ -61,7 +61,7 @@
             </LinearGradientBrush>
         </Grid.Background>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
+            <ColumnDefinition Width="215"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -69,30 +69,27 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Label Foreground="White" FontSize="20" Grid.Row="0" Grid.Column="0" Margin="10 0 0 0 " >Добавление правонарушений</Label>
+        <Label Foreground="White" FontSize="20" Grid.Row="0" Grid.Column="0" Margin="10 0 0 0">Добавление</Label>
 
         <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Vertical">
             <Label Foreground="White" FontSize="18" Height="40" Margin="5">Тип формы</Label>
             <ComboBox x:Name="TipFormComboBox" Height="40" Margin="5" DisplayMemberPath="name_tip_form"/>
             <Label Foreground="White" FontSize="18" Height="40" Margin="5">Состав нарушения</Label>
             <ComboBox x:Name="SostavComboBox" Height="40" Margin="5" DisplayMemberPath="name_sostav"/>
-            <Label Foreground="White" FontSize="18" Height="40" Margin="5">Период</Label>
-            <StackPanel Orientation="Horizontal" Height="40" Margin="5">
-                <Label Foreground="White" FontSize="18" Margin="0 0 7 0">Месяц</Label>
-                <ComboBox MinWidth="175" Margin="0 0 7 0" />
-                <Label Foreground="White" FontSize="18" Margin="0 0 7 0">Год</Label>
-                <TextBox MinWidth="100" PreviewTextInput="TextBox_PreviewTextInput"/>
-            </StackPanel>
+            <Label Foreground="White" FontSize="18" Margin="5">Месяц период</Label>
+            <ComboBox x:Name="MonthComboBox" Height="40" Margin="5" />
+            <Label Foreground="White" Height="40" FontSize="18" Margin="5">Год периода</Label>
+            <TextBox MinWidth="100" x:Name="YearTextBox" Height="40" Margin="5" PreviewTextInput="TextBox_PreviewTextInput"/>
             <Label Foreground="White" FontSize="18" Margin="5" Height="40">Сумма</Label>
-            <TextBox PreviewTextInput="TextBox_PreviewTextInput" Height="40" Margin="5"/>
+            <TextBox x:Name="SumTextBox" PreviewTextInput="TextBox_PreviewTextInput" Height="40" Margin="5"/>
             <Label Foreground="White" FontSize="18" Margin="5" Height="40">Срок сдачи</Label>
-            <DatePicker Height="40" Margin="5"/>
+            <DatePicker x:Name="LastDatePicker" Height="40" Margin="5"/>
             <Button Height="35" Margin="10 3 10 3" x:Name="AddPravonorButton" Click="AddPravonorButton_Click" Content="Добавить правонарушение"/>
-            <Button Height="35" Margin="10 3 10 3" x:Name="NextButton" Click="NextButton_Click" Content="Сформировать документ"/>
+            <Button Height="35" Margin="10 3 10 3" x:Name="NextButton" Click="NextButton_Click" Content="Закончить документ"/>
         </StackPanel>
 
-        <Label Foreground="White" FontSize="20" Grid.Column="1" Grid.Row="0" Margin="10 0 0 0 ">Список добавленных правонарушений</Label>
-        <DataGrid Name="DataGridDeptors" Grid.Row="1"  Grid.Column="1"  ColumnHeaderStyle="{StaticResource HeaderStyle}" RowStyle="{StaticResource RowStyle}" CellStyle="{StaticResource CellStyle}"  AutoGenerateColumns="False" CanUserAddRows="False" Margin="2">
+        <Label Foreground="White" FontSize="20" Grid.Column="1" Grid.Row="0" Margin="10 0 0 0">Список добавленных правонарушений</Label>
+        <DataGrid Name="DataGridPravonor" Grid.Row="1"  Grid.Column="1"  ColumnHeaderStyle="{StaticResource HeaderStyle}" RowStyle="{StaticResource RowStyle}" CellStyle="{StaticResource CellStyle}"  AutoGenerateColumns="False" CanUserAddRows="False" Margin="2">
             <DataGrid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF050E0D"/>
@@ -104,16 +101,31 @@
                     <DataGridTemplateColumn.Header>
                         Тип формы
                     </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Tip_forms.name_tip_form}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Width="*" MinWidth="150">
                     <DataGridTemplateColumn.Header>
                         Период
                     </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Period.year}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Width="*" MinWidth="150">
                     <DataGridTemplateColumn.Header>
                         Сумма
                     </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding summa}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>

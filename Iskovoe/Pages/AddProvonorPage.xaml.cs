@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Text.RegularExpressions;
 using Word = Microsoft.Office.Interop.Word;
+using System.IO;
 
 namespace Iskovoe.Pages
 {
@@ -28,6 +29,7 @@ namespace Iskovoe.Pages
             InitializeComponent();
             TipFormComboBox.ItemsSource = SourceCore.DB.Tip_forms.ToList();
             SostavComboBox.ItemsSource = SourceCore.DB.Sostav.ToList();
+            DataGridPravonor.ItemsSource = SourceCore.DB.Pravonor.Where(id_pravonor => id_pravonor.id_pravonor == buf_id_iscovoe).ToList();
             buf_id = buf_id_iscovoe;
         }
 
@@ -40,7 +42,18 @@ namespace Iskovoe.Pages
         private void AddPravonorButton_Click(object sender, RoutedEventArgs e)
         {
             //var 
-
+            var A = new Data.Pravonor();
+            A.id_iskovoe = buf_id;
+            A.Tip_forms = (Data.Tip_forms)TipFormComboBox.SelectedItem;
+            A.Sostav = (Data.Sostav)SostavComboBox.SelectedItem;
+            //A.Period.month = (Data.Period)MonthComboBox.SelectedItem;
+            //A.Period.year = int.Parse(YearTextBox.Text);
+            A.summa = decimal.Parse(SumTextBox.Text);
+            //A.Period.last_date = (Data.Debtors)DataGridDeptors.SelectedItem;
+            //A.Period.last_date = LastDatePicker.SelectedDate;
+            SourceCore.DB.Pravonor.Add(A);
+            // Сохранение изменений
+            SourceCore.DB.SaveChanges();
         }
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
@@ -65,8 +78,18 @@ namespace Iskovoe.Pages
                 //Create a missing variable for missing value  
                 object missing = System.Reflection.Missing.Value;
 
-                //Create a new document  
-                Word.Document document = winword.Documents.Add(ref missing, ref missing, ref missing, ref missing);
+                object template = Type.Missing;
+                string path = Directory.GetCurrentDirectory();
+
+                //Меняем шаблон
+                template = @"" + path + "\\Document\\Iscovoe.docx";
+
+                //Создаем документ 
+                Word.Document document = winword.Documents.Add(ref template, ref missing, ref missing, ref missing);
+
+
+                ////Create a new document  
+                //Word.Document document = winword.Documents.Add(ref missing, ref missing, ref missing, ref missing);
 
                 //Add header into the document  
                 foreach (Word.Section section in document.Sections)
@@ -93,7 +116,7 @@ namespace Iskovoe.Pages
 
                 //adding text to document  
                 document.Content.SetRange(0, 0);
-                document.Content.Text = "This is test document " + Environment.NewLine; 
+                document.Content.Text = "This is test document " + Environment.NewLine;
 
                 //Save the document  
                 document.Save();

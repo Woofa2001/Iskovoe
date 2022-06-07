@@ -73,7 +73,7 @@
         <Grid Grid.Row="0" Grid.ColumnSpan="3" MouseDown="RowDefinition_MouseDown">
             <Rectangle Fill="Transparent" Height="40" />
             <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,5,0,0" Height="40" Orientation="Horizontal" FlowDirection="RightToLeft">
-                <Label Foreground="White" FontSize="19">Главное окно</Label>
+                <Label Foreground="White" FontSize="19">Конструктор правовых документов</Label>
             </StackPanel>
             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,10,0" Height="30" Orientation="Horizontal" FlowDirection="RightToLeft">
                 <Button x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Click="btnClose_Click" Tag="IsCloseButton"/>

@@ -19,11 +19,13 @@ namespace Iskovoe
     /// </summary>
     public partial class MakeIskovoeWindow : Window
     {
-        public MakeIskovoeWindow()
+        public int id_executor;
+        public MakeIskovoeWindow(int id)
         {
             InitializeComponent();
             DataContext = this;
-            MakeIscovoeFrame.Navigate(new Pages.DefinitionDeptorPage(this));
+            MakeIscovoeFrame.Navigate(new Pages.DefinitionDeptorPage(this, id_executor));
+            id_executor = id;
         }
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {

@@ -26,6 +26,7 @@ namespace Iskovoe.Data
         public Nullable<int> id_sostav { get; set; }
         public Nullable<int> id_period { get; set; }
         public string opis { get; set; }
+        public Nullable<decimal> summa { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Document_by_pravonor> Document_by_pravonor { get; set; }
