@@ -19,15 +19,15 @@
 
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="Black"/>
-                <GradientStop Color="#FF2C7873" Offset="1"/>
+                <GradientStop Color="#20B5F5"/>
+                <GradientStop Color="White" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
 
         <Grid Grid.Row="0" Grid.ColumnSpan="2" MouseDown="RowDefinition_MouseDown">
             <Rectangle Fill="Transparent" Height="40" />
             <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,5,0,0" Height="40" Orientation="Horizontal" FlowDirection="RightToLeft">
-                <Label Foreground="White" FontSize="19" >Регистрация</Label>
+                <Label Foreground="Black" FontSize="19" >Регистрация</Label>
             </StackPanel>
             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,10,0" Height="30" Orientation="Horizontal" FlowDirection="RightToLeft">
                 <Button x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Click="btnClose_Click" Tag="IsCloseButton"/>
@@ -40,14 +40,14 @@
         <DockPanel Grid.Row="1" Grid.Column="1" >
             <StackPanel Margin="10,15,20,0">
                 <DockPanel >
-                    <Label Content="Логин" Width="140" FontSize="15" Foreground="White"/>
+                    <Label Content="Логин" Width="140" FontSize="15"/>
                     <TextBox x:Name="LoginTextBox" TabIndex="0"/>
                 </DockPanel>
 
                 <DockPanel Margin="0,5,0,0">
-                    <Label Content="Пароль" Width="140" FontSize="15" Foreground="White"/>
-                    <Button x:Name="PasswordButton" Height="27"  DockPanel.Dock="Right" Click="PasswordButton_Click">
-                        <Image  Source="image/eye.png" ></Image>
+                    <Label Content="Пароль" Width="140" FontSize="15"/>
+                    <Button x:Name="PasswordButton" Height="27" Width="27" DockPanel.Dock="Right" Click="PasswordButton_Click">
+                        <Image Height="20" Width="20"  Source="image/eye.png" ></Image>
                     </Button>
                     <TextBox x:Name="PasswordTextBox" Width="0" Visibility="Hidden"
                              TabIndex="1"/>
@@ -55,11 +55,11 @@
                 </DockPanel>
 
                 <DockPanel Margin="0,5,0,0">
-                    <Label Content="Повторите пароль" Width="140" FontSize="15" Foreground="White"/>
-                    <Button x:Name="PasswordTwoButton" Height="27"  DockPanel.Dock="Right" Click="PasswordButtontwo_Click">
-                        <Image  Source="image/eye.png" ></Image>
-                    </Button>
-                    <TextBox x:Name="PasswordTextBoxTwo" Width="0" Visibility="Hidden"
+                    <Label Content="Повторите пароль" Width="140" FontSize="15"/>
+                    <Button x:Name="PasswordTwoButton" Height="27" Width="27" DockPanel.Dock="Right" Click="PasswordButtontwo_Click">
+                        <Image Height="20" Width="20"  Source="image/eye.png" ></Image>
+                        </Button>
+                        <TextBox x:Name="PasswordTextBoxTwo" Width="0" Visibility="Hidden"
                              TabIndex="1"/>
                     <PasswordBox x:Name="PasswordPasswordBoxTwo" TabIndex="2"/>
                 </DockPanel>

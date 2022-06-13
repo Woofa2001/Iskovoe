@@ -34,7 +34,8 @@ namespace Iskovoe
             InitializeComponent();
             buf_id = id;
             DataContext = this;
-            DataGridIscovoe.ItemsSource = SourceCore.DB.Iskovoe.Where(id_dolg => id_dolg.id_dolg.Value == buf_id).ToList();
+            //DataGridIscovoe.ItemsSource = SourceCore.DB.Iskovoe.Where(id_dolg => id_dolg.id_dolg.Value == buf_id).ToList();
+            DataGridIscovoe.ItemsSource = SourceCore.DB.Iskovoe.Where(P => P.id_dolg.Value == buf_id).OrderBy(P => P.id_dolg).Skip((BlockNum - 1) * BlockRecordsCount).Take(BlockRecordsCount).ToList();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -262,6 +263,96 @@ namespace Iskovoe
                 GetImageBase64FromDb(@"" + filePath);
                 MessageBox.Show("Картинка изменена");
             }
+        }
+
+        // Текущий номер блока информации в таблице
+        private int _BlockNum = 1;
+        public int BlockNum
+        {
+            get
+            {
+                return _BlockNum;
+            }
+            set
+            {
+                if (value <= 0)
+                {
+                    value = 1;
+                }
+                else
+                {
+                    if (value > BlockCount)
+                    {
+                        value = BlockCount;
+                    }
+                }
+                if (_BlockNum != value)
+                {
+                    _BlockNum = value;
+                    BlockNumLabel.GetBindingExpression(Label.ContentProperty).UpdateTarget();
+                }
+                UpdateGrid(null);
+            }
+        }
+
+        // Количество записей в блоке информации в таблице
+        private int _BlockRecordsCount = 5;
+        public int BlockRecordsCount
+        {
+            get
+            {
+                return _BlockRecordsCount;
+            }
+            set
+            {
+                if (value <= 0)
+                {
+                    value = 1;
+                }
+                if (_BlockRecordsCount != value)
+                {
+                    _BlockRecordsCount = value;
+                    BlockCountLabel.GetBindingExpression(Label.ContentProperty).UpdateTarget();
+                    BlockNum = _BlockNum;
+                    UpdateGrid(null);
+                }
+            }
+        }
+
+        public int BlockCount
+        {
+            get { return (SourceCore.DB.Iskovoe.Where(P => P.id_dolg.Value == buf_id).Count() - 1) / BlockRecordsCount + 1; }
+        }
+
+        private void FirstBlockButton_Click(object sender, RoutedEventArgs e)
+        {
+            BlockNum = 1;
+        }
+
+        private void PreviosBlockButton_Click(object sender, RoutedEventArgs e)
+        {
+            BlockNum--;
+        }
+
+        private void NextBlockButton_Click(object sender, RoutedEventArgs e)
+        {
+            BlockNum++;
+        }
+
+        private void LastBlockButton_Click(object sender, RoutedEventArgs e)
+        {
+            BlockNum = BlockCount;
+        }
+
+        //Метод обновления грида
+        public void UpdateGrid(Data.Iskovoe Debtors)
+        {
+            if ((Debtors == null) && (DataGridIscovoe.ItemsSource != null))
+            {
+                Debtors = (Data.Iskovoe)DataGridIscovoe.SelectedItem;
+            }
+            DataGridIscovoe.ItemsSource = SourceCore.DB.Iskovoe.Where(P => P.id_dolg.Value == buf_id).OrderBy(P => P.id_dolg).Skip((BlockNum - 1) * BlockRecordsCount).Take(BlockRecordsCount).ToList();
+            DataGridIscovoe.SelectedItem = Debtors;
         }
     }
 }

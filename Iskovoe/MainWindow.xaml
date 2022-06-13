@@ -26,7 +26,7 @@
             <Setter Property="Background" Value="{StaticResource HeaderBrush}" />
             <Setter Property="Foreground" Value="White" />
             <Setter Property="BorderBrush" Value="{StaticResource HeaderBorderBrush}" />
-            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="BorderThickness" Value="0 0 0.7 0" />
             <Setter Property="SnapsToDevicePixels" Value="True" />
             <Setter Property="HorizontalContentAlignment" Value="Left" />
             <Setter Property="MinWidth" Value="0" />
@@ -41,7 +41,6 @@
         </Style>
 
         <Style x:Key="RowStyle" TargetType="DataGridRow">
-            <Setter Property="Background" Value="#6FB98F"/>
             <Setter Property="MinHeight" Value="30"/>
             <Setter Property="MaxHeight" Value="100"/>
         </Style>
@@ -54,8 +53,8 @@
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="Black"/>
-                <GradientStop Color="#FF2C7873" Offset="1"/>
+                <GradientStop Color="#20B5F5"/>
+                <GradientStop Color="White" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
         <Grid.ColumnDefinitions>
@@ -65,6 +64,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="45"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="80"/>
@@ -93,15 +93,16 @@
             </StackPanel>
         </Grid>
 
-        <Rectangle x:Name="Rectangle" Fill="Gray" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Width="3"/>
+        <Rectangle x:Name="Rectangle" Fill="Gray" Grid.Column="1" Grid.Row="1" Grid.RowSpan="4" Width="3"/>
+        <Rectangle Fill="Gray" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Height="3"/>
 
-        <StackPanel  Grid.Column="2" Grid.Row="1" Orientation="Horizontal" Margin="0 5 0 5">
+        <StackPanel  Grid.Column="2" Grid.Row="2" Orientation="Horizontal" Margin="0 5 0 5">
             <ComboBox Name="FilterCombobox" Width="220" Margin="5 1 15 1" SelectionChanged="FilterCombobox_SelectionChanged" />
             <TextBox x:Name="TextBoxStart" Width="270" Margin="5,1,0,1"  TextChanged="TextBox_TextChanged"></TextBox>
             <TextBox x:Name="TextBoxEnd" Width="135" Margin="5,1,0,1" TextChanged="TextBoxEnd_TextChanged" Visibility="Hidden" />
         </StackPanel>
 
-        <Grid x:Name="gridMenu" Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" >
+        <Grid x:Name="gridMenu" Grid.Row="2" Grid.Column="0" Grid.RowSpan="3" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
@@ -156,11 +157,11 @@
             </ToggleButton>
         </Grid>
 
-        <DataGrid Name="DataGridIscovoe" Grid.Column="2" Grid.Row="2"  ColumnHeaderStyle="{StaticResource HeaderStyle}" RowStyle="{StaticResource RowStyle}" CellStyle="{StaticResource CellStyle}"  AutoGenerateColumns="False" CanUserAddRows="False"  >
+        <DataGrid Name="DataGridIscovoe" Grid.Column="2" Grid.Row="3"  ColumnHeaderStyle="{StaticResource HeaderStyle}" RowStyle="{StaticResource RowStyle}" CellStyle="{StaticResource CellStyle}"  AutoGenerateColumns="False" CanUserAddRows="False"  >
             <DataGrid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black"/>
-                    <GradientStop Color="#FF2C7873" Offset="1"/>
+                    <GradientStop Color="#FF5CC9F8"/>
+                    <GradientStop Color="#FFD6F1FD" Offset="1"/>
                 </LinearGradientBrush>
             </DataGrid.Background>
             <DataGrid.Columns >
@@ -186,11 +187,20 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel   Orientation="Vertical"  Grid.Column="2" Grid.Row="3">
-            <StackPanel Height="35" Orientation="Horizontal">
-                <Label Foreground="White">Дополнительная навигация</Label>
+        <StackPanel Orientation="Vertical"  Grid.Column="2" Grid.Row="4">
+            <StackPanel Orientation="Horizontal" Height="30" Margin="0,5,0,5" >
+                <Button x:Name="FirstBlockButton" Content="В начало" Width="80" Margin="10,0,0,0" Click="FirstBlockButton_Click"/>
+                <Button x:Name="PreviosBlockButton" Content="Назад" Width="80" Margin="5,0,0,0" Click="PreviosBlockButton_Click"/>
+                <Label Margin="15,0,0,0" Content="Страница:"/>
+                <Label x:Name="BlockNumLabel" Margin="-5,0,0,0" Content="{Binding Path=BlockNum}"/>
+                <Label Margin="-5,0,0,0" Content="из"/>
+                <Label x:Name="BlockCountLabel" Margin="-5,0,0,0" Content="{Binding Path=BlockCount}"/>
+                <Button x:Name="NextBlockButton" Content="Вперед" Width="80" Margin="15,0,0,0" Click="NextBlockButton_Click"/>
+                <Button x:Name="LastBlockButton" Content="В конец" Width="80" Margin="5,0,0,0" Click="LastBlockButton_Click"/>
+                <Label Margin="15,0,0,0" Content="Количество записей на странице:"/>
+                <TextBox x:Name="BlockRecordsCountTextBox" Width="60" Text="{Binding Path=BlockRecordsCount, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
-            <Button Margin="15 0 15 0" Height="35" Content="Подготовить исковое заявление" Click="Button_Click"/>
+            <Button Margin="10 0 10 0" Height="35" Content="Подготовить исковое заявление" Click="Button_Click"/>
         </StackPanel>
     </Grid>
 </Window>
