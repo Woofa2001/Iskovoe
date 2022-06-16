@@ -35,7 +35,7 @@ namespace Iskovoe
             buf_id = id;
             DataContext = this;
             //DataGridIscovoe.ItemsSource = SourceCore.DB.Iskovoe.Where(id_dolg => id_dolg.id_dolg.Value == buf_id).ToList();
-            DataGridIscovoe.ItemsSource = SourceCore.DB.Iskovoe.Where(P => P.id_dolg.Value == buf_id).OrderBy(P => P.id_dolg).Skip((BlockNum - 1) * BlockRecordsCount).Take(BlockRecordsCount).ToList();
+            DataGridIscovoe.ItemsSource = SourceCore.DB.Iskovoe.Where(P => P.id_executor.Value == buf_id).OrderBy(P => P.id_dolg).Skip((BlockNum - 1) * BlockRecordsCount).Take(BlockRecordsCount).ToList();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -321,7 +321,7 @@ namespace Iskovoe
 
         public int BlockCount
         {
-            get { return (SourceCore.DB.Iskovoe.Where(P => P.id_dolg.Value == buf_id).Count() - 1) / BlockRecordsCount + 1; }
+            get { return (SourceCore.DB.Iskovoe.Where(P => P.id_executor.Value == buf_id).Count() - 1) / BlockRecordsCount + 1; }
         }
 
         private void FirstBlockButton_Click(object sender, RoutedEventArgs e)
@@ -351,7 +351,7 @@ namespace Iskovoe
             {
                 Debtors = (Data.Iskovoe)DataGridIscovoe.SelectedItem;
             }
-            DataGridIscovoe.ItemsSource = SourceCore.DB.Iskovoe.Where(P => P.id_dolg.Value == buf_id).OrderBy(P => P.id_dolg).Skip((BlockNum - 1) * BlockRecordsCount).Take(BlockRecordsCount).ToList();
+            DataGridIscovoe.ItemsSource = SourceCore.DB.Iskovoe.Where(P => P.id_executor.Value == buf_id).OrderBy(P => P.id_dolg).Skip((BlockNum - 1) * BlockRecordsCount).Take(BlockRecordsCount).ToList();
             DataGridIscovoe.SelectedItem = Debtors;
         }
     }

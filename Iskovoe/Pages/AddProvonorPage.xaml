@@ -62,6 +62,7 @@
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="215"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -69,29 +70,28 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Label Foreground="White" FontSize="20" Grid.Row="0" Grid.Column="0" Margin="10 0 0 0">Добавление</Label>
+        <Label FontSize="20" Margin="10 0 0 0">Добавление</Label>
+        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Vertical">
+            <Label FontSize="18" Height="40" Margin="5">Тип формы</Label>
+            <ComboBox x:Name="TipFormComboBox" Height="40" Margin="5" DisplayMemberPath="name_tip_form"/>
+            <Label FontSize="18" Height="40" Margin="5">Состав нарушения</Label>
+            <ComboBox x:Name="SostavComboBox" Height="40" Margin="5" DisplayMemberPath="name_sostav"/>
+            <Label FontSize="18" Margin="5">Месяц период</Label>
+            <ComboBox x:Name="MonthComboBox" Height="40" Margin="5" />
+            <Label Height="40" FontSize="18" Margin="5">Год периода</Label>
+            <TextBox MinWidth="100" x:Name="YearTextBox" Height="40" Margin="5" PreviewTextInput="TextBox_PreviewTextInput"/>
+            <Label FontSize="18" Margin="5" Height="40">Сумма</Label>
+            <TextBox x:Name="SumTextBox" PreviewTextInput="TextBox_PreviewTextInput" Height="40" Margin="5"/>
+            <Label FontSize="18" Margin="5" Height="40">Срок сдачи</Label>
+            <DatePicker x:Name="LastDatePicker" Height="40" Margin="5"/>
+            <Button Height="35" Margin="10 3 10 3" x:Name="AddPravonorButton" Click="AddPravonorButton_Click" Content="Добавить правонарушение"/>
+            <Button Height="35" Margin="10 3 10 3" x:Name="NextButton" Click="NextButton_Click" Content="Закончить документ"/>
+        </StackPanel>
 
-        <ScrollViewer Grid.Column="0" Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <StackPanel Orientation="Vertical">
-                <Label FontSize="18" Height="40" Margin="5">Тип формы</Label>
-                <ComboBox x:Name="TipFormComboBox" Height="40" Margin="5" DisplayMemberPath="name_tip_form"/>
-                <Label FontSize="18" Height="40" Margin="5">Состав нарушения</Label>
-                <ComboBox x:Name="SostavComboBox" Height="40" Margin="5" DisplayMemberPath="name_sostav"/>
-                <Label FontSize="18" Margin="5">Месяц период</Label>
-                <ComboBox x:Name="MonthComboBox" Height="40" Margin="5" />
-                <Label Height="40" FontSize="18" Margin="5">Год периода</Label>
-                <TextBox MinWidth="100" x:Name="YearTextBox" Height="40" Margin="5" PreviewTextInput="TextBox_PreviewTextInput"/>
-                <Label FontSize="18" Margin="5" Height="40">Сумма</Label>
-                <TextBox x:Name="SumTextBox" PreviewTextInput="TextBox_PreviewTextInput" Height="40" Margin="5"/>
-                <Label FontSize="18" Margin="5" Height="40">Срок сдачи</Label>
-                <DatePicker x:Name="LastDatePicker" Height="40" Margin="5"/>
-                <Button Height="35" Margin="10 3 10 3" x:Name="AddPravonorButton" Click="AddPravonorButton_Click" Content="Добавить правонарушение"/>
-                <Button Height="35" Margin="10 3 10 3" x:Name="NextButton" Click="NextButton_Click" Content="Закончить документ"/>
-            </StackPanel>
-        </ScrollViewer>
+        <Rectangle x:Name="Rectangle" Fill="Gray" Grid.Column="1" Grid.Row="0" Grid.RowSpan="4" Width="2"/>
 
-        <Label Foreground="White" FontSize="20" Grid.Column="1" Grid.Row="0" Margin="10 0 0 0">Список добавленных правонарушений</Label>
-        <DataGrid Name="DataGridPravonor" Grid.Row="1"  Grid.Column="1"  ColumnHeaderStyle="{StaticResource HeaderStyle}" RowStyle="{StaticResource RowStyle}" CellStyle="{StaticResource CellStyle}"  AutoGenerateColumns="False" CanUserAddRows="False" Margin="2">
+        <Label FontSize="20" Grid.Column="2" Grid.Row="0" Margin="7 0 0 0">Список добавленных правонарушений</Label>
+        <DataGrid Name="DataGridPravonor" Grid.Row="1" Grid.Column="2" ColumnHeaderStyle="{StaticResource HeaderStyle}" RowStyle="{StaticResource RowStyle}" CellStyle="{StaticResource CellStyle}" AutoGenerateColumns="False" CanUserAddRows="False">
             <DataGrid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF3ABEF6"/>

@@ -72,8 +72,8 @@
 
         <Grid Grid.Row="0" Grid.ColumnSpan="3" MouseDown="RowDefinition_MouseDown">
             <Rectangle Fill="Transparent" Height="40" />
-            <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,5,0,0" Height="40" Orientation="Horizontal" FlowDirection="RightToLeft">
-                <Label FontSize="19">Конструктор правовых документов</Label>
+            <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0" Height="40" Orientation="Horizontal" FlowDirection="RightToLeft">
+                <Label FontSize="22">Конструктор правовых документов</Label>
             </StackPanel>
             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,10,0" Height="30" Orientation="Horizontal" FlowDirection="RightToLeft">
                 <Button x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Click="btnClose_Click" Tag="IsCloseButton"/>
@@ -93,8 +93,8 @@
             </StackPanel>
         </Grid>
 
-        <Rectangle x:Name="Rectangle" Fill="Gray" Grid.Column="1" Grid.Row="1" Grid.RowSpan="4" Width="3"/>
-        <Rectangle Fill="Gray" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Height="3"/>
+        <Rectangle x:Name="Rectangle" Fill="Gray" Grid.Column="1" Grid.Row="1" Grid.RowSpan="4" Width="2"/>
+        <Rectangle Fill="Gray" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Height="2"/>
 
         <StackPanel  Grid.Column="2" Grid.Row="2" Orientation="Horizontal" Margin="0 5 0 5">
             <ComboBox Name="FilterCombobox" Width="220" Margin="5 1 15 1" SelectionChanged="FilterCombobox_SelectionChanged" />

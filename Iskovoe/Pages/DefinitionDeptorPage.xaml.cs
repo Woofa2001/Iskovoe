@@ -20,14 +20,15 @@ namespace Iskovoe.Pages
     /// </summary>
     public partial class DefinitionDeptorPage : Page
     {
-        public int id_executor;
+        public int Id_executor;
         private MakeIskovoeWindow MakeIskovoeWindow;
         public DefinitionDeptorPage(MakeIskovoeWindow makeIskovoeWindow, int id_executor)
         {
             InitializeComponent();
             DataContext = this;
-            DataGridDeptors.ItemsSource = SourceCore.DB.Debtors.OrderBy(P => P.id_dolg).Skip((BlockNum - 1) * BlockRecordsCount).Take(BlockRecordsCount).ToList(); ;
+            DataGridDeptors.ItemsSource = SourceCore.DB.Debtors.OrderBy(P => P.name_dolg).Skip((BlockNum - 1) * BlockRecordsCount).Take(BlockRecordsCount).ToList(); ;
             MakeIskovoeWindow = makeIskovoeWindow;
+            Id_executor = id_executor;
         }
 
         private void FilterCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -89,7 +90,7 @@ namespace Iskovoe.Pages
             if (DataGridDeptors.SelectedItem != null)
             {
                 var A = new Data.Iskovoe();
-                A.id_executor = id_executor+1;
+                A.id_executor = Id_executor+1;
                 A.Debtors = (Data.Debtors)DataGridDeptors.SelectedItem;
                 SourceCore.DB.Iskovoe.Add(A);
                 // Сохранение изменений
@@ -159,7 +160,7 @@ namespace Iskovoe.Pages
 
         public int BlockCount
         {
-            get { return (SourceCore.DB.Debtors.Count() - 1) / BlockRecordsCount + 1; }
+            get { return (SourceCore.DB.Debtors.OrderBy(P => P.name_dolg).Count() - 1) / BlockRecordsCount + 1; }
         }
 
         private void FirstBlockButton_Click(object sender, RoutedEventArgs e)
