@@ -33,6 +33,7 @@ namespace Iskovoe.Pages
             buf_id = buf_id_iscovoe;
         }
 
+
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");

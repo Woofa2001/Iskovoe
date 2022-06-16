@@ -29,6 +29,9 @@ namespace Iskovoe
         public int buf_id;
         public string ImagePath;
         public string DataSource = @"HOME-PC\SQLEXPRESS"; // Соединение(Имя сервера)
+        // Текущий номер блока информации в таблице
+        private int _BlockNum = 1;
+
         public MainWindow(int id)
         {
             InitializeComponent();
@@ -265,8 +268,6 @@ namespace Iskovoe
             }
         }
 
-        // Текущий номер блока информации в таблице
-        private int _BlockNum = 1;
         public int BlockNum
         {
             get
