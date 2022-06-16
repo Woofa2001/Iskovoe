@@ -56,8 +56,8 @@
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FF050E0D"/>
-                <GradientStop Color="#FF2C7873" Offset="1"/>
+                <GradientStop Color="#20B5F5"/>
+                <GradientStop Color="White" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
         <Grid.ColumnDefinitions>
@@ -73,17 +73,17 @@
 
         <ScrollViewer Grid.Column="0" Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <StackPanel Orientation="Vertical">
-                <Label Foreground="White" FontSize="18" Height="40" Margin="5">Тип формы</Label>
+                <Label FontSize="18" Height="40" Margin="5">Тип формы</Label>
                 <ComboBox x:Name="TipFormComboBox" Height="40" Margin="5" DisplayMemberPath="name_tip_form"/>
-                <Label Foreground="White" FontSize="18" Height="40" Margin="5">Состав нарушения</Label>
+                <Label FontSize="18" Height="40" Margin="5">Состав нарушения</Label>
                 <ComboBox x:Name="SostavComboBox" Height="40" Margin="5" DisplayMemberPath="name_sostav"/>
-                <Label Foreground="White" FontSize="18" Margin="5">Месяц период</Label>
+                <Label FontSize="18" Margin="5">Месяц период</Label>
                 <ComboBox x:Name="MonthComboBox" Height="40" Margin="5" />
-                <Label Foreground="White" Height="40" FontSize="18" Margin="5">Год периода</Label>
+                <Label Height="40" FontSize="18" Margin="5">Год периода</Label>
                 <TextBox MinWidth="100" x:Name="YearTextBox" Height="40" Margin="5" PreviewTextInput="TextBox_PreviewTextInput"/>
-                <Label Foreground="White" FontSize="18" Margin="5" Height="40">Сумма</Label>
+                <Label FontSize="18" Margin="5" Height="40">Сумма</Label>
                 <TextBox x:Name="SumTextBox" PreviewTextInput="TextBox_PreviewTextInput" Height="40" Margin="5"/>
-                <Label Foreground="White" FontSize="18" Margin="5" Height="40">Срок сдачи</Label>
+                <Label FontSize="18" Margin="5" Height="40">Срок сдачи</Label>
                 <DatePicker x:Name="LastDatePicker" Height="40" Margin="5"/>
                 <Button Height="35" Margin="10 3 10 3" x:Name="AddPravonorButton" Click="AddPravonorButton_Click" Content="Добавить правонарушение"/>
                 <Button Height="35" Margin="10 3 10 3" x:Name="NextButton" Click="NextButton_Click" Content="Закончить документ"/>
@@ -94,8 +94,8 @@
         <DataGrid Name="DataGridPravonor" Grid.Row="1"  Grid.Column="1"  ColumnHeaderStyle="{StaticResource HeaderStyle}" RowStyle="{StaticResource RowStyle}" CellStyle="{StaticResource CellStyle}"  AutoGenerateColumns="False" CanUserAddRows="False" Margin="2">
             <DataGrid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF050E0D"/>
-                    <GradientStop Color="#FF2C7873" Offset="1"/>
+                    <GradientStop Color="#FF3ABEF6"/>
+                    <GradientStop Color="White" Offset="1"/>
                 </LinearGradientBrush>
             </DataGrid.Background>
             <DataGrid.Columns>

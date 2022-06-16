@@ -26,7 +26,7 @@ namespace Iskovoe.Pages
         {
             InitializeComponent();
             DataContext = this;
-            DataGridDeptors.ItemsSource = SourceCore.DB.Debtors.ToList();
+            DataGridDeptors.ItemsSource = SourceCore.DB.Debtors.OrderBy(P => P.id_dolg).Skip((BlockNum - 1) * BlockRecordsCount).Take(BlockRecordsCount).ToList(); ;
             MakeIskovoeWindow = makeIskovoeWindow;
         }
 
@@ -101,6 +101,96 @@ namespace Iskovoe.Pages
             {
                 MessageBox.Show("Выберите должника");
             }
+        }
+
+        // Текущий номер блока информации в таблице
+        private int _BlockNum = 1;
+        public int BlockNum
+        {
+            get
+            {
+                return _BlockNum;
+            }
+            set
+            {
+                if (value <= 0)
+                {
+                    value = 1;
+                }
+                else
+                {
+                    if (value > BlockCount)
+                    {
+                        value = BlockCount;
+                    }
+                }
+                if (_BlockNum != value)
+                {
+                    _BlockNum = value;
+                    BlockNumLabel.GetBindingExpression(Label.ContentProperty).UpdateTarget();
+                }
+                UpdateGrid(null);
+            }
+        }
+
+        // Количество записей в блоке информации в таблице
+        private int _BlockRecordsCount = 5;
+        public int BlockRecordsCount
+        {
+            get
+            {
+                return _BlockRecordsCount;
+            }
+            set
+            {
+                if (value <= 0)
+                {
+                    value = 1;
+                }
+                if (_BlockRecordsCount != value)
+                {
+                    _BlockRecordsCount = value;
+                    BlockCountLabel.GetBindingExpression(Label.ContentProperty).UpdateTarget();
+                    BlockNum = _BlockNum;
+                    UpdateGrid(null);
+                }
+            }
+        }
+
+        public int BlockCount
+        {
+            get { return (SourceCore.DB.Debtors.Count() - 1) / BlockRecordsCount + 1; }
+        }
+
+        private void FirstBlockButton_Click(object sender, RoutedEventArgs e)
+        {
+            BlockNum = 1;
+        }
+
+        private void PreviosBlockButton_Click(object sender, RoutedEventArgs e)
+        {
+            BlockNum--;
+        }
+
+        private void NextBlockButton_Click(object sender, RoutedEventArgs e)
+        {
+            BlockNum++;
+        }
+
+        private void LastBlockButton_Click(object sender, RoutedEventArgs e)
+        {
+            BlockNum = BlockCount;
+        }
+
+        //Метод обновления грида
+        public void UpdateGrid(Data.Debtors Debtors)
+        {
+            if ((Debtors == null) && (DataGridDeptors.ItemsSource != null))
+            {
+                Debtors = (Data.Debtors)DataGridDeptors.SelectedItem;
+            }
+            DataGridDeptors.ItemsSource = SourceCore.DB.Debtors.OrderBy(P => P.name_dolg).Skip((BlockNum - 1) * BlockRecordsCount).Take(BlockRecordsCount).ToList();
+            DataGridDeptors.SelectedItem = Debtors;
         }
     }
 }

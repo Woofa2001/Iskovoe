@@ -42,7 +42,6 @@
         </Style>
 
         <Style x:Key="RowStyle" TargetType="DataGridRow">
-            <Setter Property="Background" Value="#6FB98F"/>
             <Setter Property="MinHeight" Value="30"/>
             <Setter Property="MaxHeight" Value="100"/>
         </Style>
@@ -56,10 +55,14 @@
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FF050E0D"/>
-                <GradientStop Color="#FF2C7873" Offset="1"/>
+                <GradientStop Color="#20B5F5"/>
+                <GradientStop Color="White" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
@@ -68,19 +71,19 @@
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
-        <Label Foreground="White" FontSize="20" Grid.Row="0" Margin="10 0 0 0 " >Выбор должника</Label>
+        <Label FontSize="20" Grid.Row="0" Margin="10 0 0 0">Выбор должника</Label>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 5 0 5">
+        <StackPanel Grid.ColumnSpan="2" Grid.Row="1" Orientation="Horizontal" Margin="0 5 0 5">
             <ComboBox Name="FilterCombobox" Width="220" Margin="10 1 15 1" SelectionChanged="FilterCombobox_SelectionChanged" />
             <TextBox x:Name="TextBoxStart" Width="270" Margin="5,1,0,1"  TextChanged="TextBox_TextChanged"></TextBox>
             <TextBox x:Name="TextBoxEnd" Width="135" Margin="5,1,0,1" TextChanged="TextBoxEnd_TextChanged" Visibility="Hidden" />
         </StackPanel>
 
-        <DataGrid Name="DataGridDeptors" Grid.Row="2"  ColumnHeaderStyle="{StaticResource HeaderStyle}" RowStyle="{StaticResource RowStyle}" CellStyle="{StaticResource CellStyle}"  AutoGenerateColumns="False" CanUserAddRows="False"  >
+        <DataGrid Name="DataGridDeptors" Grid.Row="2" Grid.ColumnSpan="2" ColumnHeaderStyle="{StaticResource HeaderStyle}" RowStyle="{StaticResource RowStyle}" CellStyle="{StaticResource CellStyle}"  AutoGenerateColumns="False" CanUserAddRows="False"  >
             <DataGrid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF1F1F1F"/>
-                    <GradientStop Color="#FF2C7873" Offset="1"/>
+                    <GradientStop Color="#20B5F5"/>
+                    <GradientStop Color="#FFD8F2FD" Offset="1"/>
                 </LinearGradientBrush>
             </DataGrid.Background>
             <DataGrid.Columns >
@@ -137,14 +140,23 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal">
-            <Label  Foreground="White" FontSize="20" >Навигация</Label>
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Height="30" Margin="0,5,0,5" >
+                <Button x:Name="FirstBlockButton" Content="В начало" Width="80" Margin="10,0,0,0" Click="FirstBlockButton_Click"/>
+                <Button x:Name="PreviosBlockButton" Content="Назад" Width="80" Margin="5,0,0,0" Click="PreviosBlockButton_Click"/>
+                <Label Margin="15,0,0,0" Content="Страница:"/>
+                <Label x:Name="BlockNumLabel" Margin="-5,0,0,0" Content="{Binding Path=BlockNum}"/>
+                <Label Margin="-5,0,0,0" Content="из"/>
+                <Label x:Name="BlockCountLabel" Margin="-5,0,0,0" Content="{Binding Path=BlockCount}"/>
+                <Button x:Name="NextBlockButton" Content="Вперед" Width="80" Margin="15,0,0,0" Click="NextBlockButton_Click"/>
+                <Button x:Name="LastBlockButton" Content="В конец" Width="80" Margin="5,0,0,0" Click="LastBlockButton_Click"/>
+                <Label Margin="15,0,0,0" Content="Количество записей на странице:"/>
+                <TextBox x:Name="BlockRecordsCountTextBox" Width="60" Text="{Binding Path=BlockRecordsCount, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
         </StackPanel>
 
-        <StackPanel Grid.Row="4" Orientation="Horizontal">
-            <Button Width="380" Margin=" 10 3 10 3" x:Name="AddDeptorsButton" Click="AddDeptorsButton_Click" Content="Добавить должника"/>
-            <Button Width="380" Margin=" 10 3 10 3" x:Name="NextButton" Click="NextButton_Click" Content="Далее"/>
-        </StackPanel>
+        <Button Grid.Row="4" Grid.Column="0" Margin="10 3 10 3" x:Name="AddDeptorsButton" Click="AddDeptorsButton_Click" Content="Добавить должника"/>
+        <Button Grid.Row="4" Grid.Column="1" Margin="10 3 10 3" x:Name="NextButton" Click="NextButton_Click" Content="Далее"/>
 
     </Grid>
 </Page>
