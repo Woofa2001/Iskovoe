@@ -37,7 +37,6 @@ namespace Iskovoe
             InitializeComponent();
             buf_id = id;
             DataContext = this;
-            //DataGridIscovoe.ItemsSource = SourceCore.DB.Iskovoe.Where(id_dolg => id_dolg.id_dolg.Value == buf_id).ToList();
             DataGridIscovoe.ItemsSource = SourceCore.DB.Iskovoe.Where(P => P.id_executor.Value == buf_id).OrderBy(P => P.id_dolg).Skip((BlockNum - 1) * BlockRecordsCount).Take(BlockRecordsCount).ToList();
         }
 

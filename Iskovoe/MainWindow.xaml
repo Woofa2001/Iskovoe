@@ -157,7 +157,8 @@
             </ToggleButton>
         </Grid>
 
-        <DataGrid Name="DataGridIscovoe" Grid.Column="2" Grid.Row="3"  ColumnHeaderStyle="{StaticResource HeaderStyle}" RowStyle="{StaticResource RowStyle}" CellStyle="{StaticResource CellStyle}"  AutoGenerateColumns="False" CanUserAddRows="False"  >
+        <DataGrid Name="DataGridIscovoe" Grid.Column="2" Grid.Row="3"  ColumnHeaderStyle="{StaticResource HeaderStyle}" RowStyle="{StaticResource RowStyle}" CellStyle="{StaticResource CellStyle}" 
+                  AutoGenerateColumns="False" CanUserAddRows="False">
             <DataGrid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF5CC9F8"/>
@@ -165,7 +166,7 @@
                 </LinearGradientBrush>
             </DataGrid.Background>
             <DataGrid.Columns >
-                <DataGridTemplateColumn MinWidth="150" Width="*" >
+                <DataGridTemplateColumn MinWidth="150" Width="*">
                     <DataGridTemplateColumn.Header>
                         Должник
                     </DataGridTemplateColumn.Header>
@@ -187,6 +188,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        
         <StackPanel Orientation="Vertical"  Grid.Column="2" Grid.Row="4">
             <StackPanel Orientation="Horizontal" Height="30" Margin="0,5,0,5" >
                 <Button x:Name="FirstBlockButton" Content="В начало" Width="80" Margin="10,0,0,0" Click="FirstBlockButton_Click"/>
