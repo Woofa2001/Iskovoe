@@ -23,7 +23,7 @@ namespace Iskovoe
         private Data.IskovoeEntities Database;
         public RegistrationWindows(Data.IskovoeEntities Database)
         {
-            InitializeComponent();
+                InitializeComponent();
             this.Database = Database;
         }
 

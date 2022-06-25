@@ -11,6 +11,7 @@
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -35,8 +36,10 @@
                 <Button x:Name="btnMinimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource minimize}" Click="btnMinimize_Click"/>
             </StackPanel>
         </Grid>
-        <Image Margin="15" Source="image/photoroom.png" Width="100" Height="100" Grid.Row="1" HorizontalAlignment="Left"/>
-        <DockPanel Grid.Row="1" Grid.Column="1" >
+        <Rectangle Fill="Gray" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Height="2"/>
+        
+        <Image Margin="15" Source="image/photoroom.png" Width="100" Height="100" Grid.Row="2" HorizontalAlignment="Left"/>
+        <DockPanel Grid.Row="2" Grid.Column="1" >
 
             <StackPanel Margin="10,15,20,0">
                 

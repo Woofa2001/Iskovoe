@@ -109,8 +109,8 @@
 
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
-                    <Ellipse x:Name="ImageElipse" Width="38" Height="38" Margin="4" HorizontalAlignment="Left" VerticalAlignment="Top">
-                        <Ellipse.Fill>
+                    <Ellipse x:Name="ImageElipse" Width="38" Height="38" Margin="4" HorizontalAlignment="Left" VerticalAlignment="Top" MouseDown="test_Click">
+                        <Ellipse.Fill >
                             <ImageBrush ImageSource="Image/ico-kontakty.png"/>
                         </Ellipse.Fill>
                     </Ellipse>
@@ -118,8 +118,7 @@
                         <Label Foreground="White" FontSize="14" x:Name="NameLabel"></Label>
                         <Label Foreground="White" FontSize="14" x:Name="INNLabel"></Label>
                         <Label Foreground="White" FontSize="14" x:Name="KppLabel"></Label>
-                        <Label Foreground="White" FontSize="14" x:Name="PhoneLabel" ></Label>
-                        <Button Name="test" Click="test_Click" Width="150" Height="30" Content="Изменить картинку"/>
+                        <Label Foreground="White" FontSize="14" x:Name="PhoneLabel"></Label>
                     </StackPanel>
                 </StackPanel>
 
@@ -157,7 +156,7 @@
             </ToggleButton>
         </Grid>
 
-        <DataGrid Name="DataGridIscovoe" Grid.Column="2" Grid.Row="3"  ColumnHeaderStyle="{StaticResource HeaderStyle}" RowStyle="{StaticResource RowStyle}" CellStyle="{StaticResource CellStyle}" 
+        <DataGrid Name="DataGridIscovoe" Grid.Column="2" Grid.Row="3" CanUserSortColumns="True" ColumnHeaderStyle="{StaticResource HeaderStyle}" RowStyle="{StaticResource RowStyle}" CellStyle="{StaticResource CellStyle}" 
                   AutoGenerateColumns="False" CanUserAddRows="False">
             <DataGrid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -188,7 +187,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        
+
         <StackPanel Orientation="Vertical"  Grid.Column="2" Grid.Row="4">
             <StackPanel Orientation="Horizontal" Height="30" Margin="0,5,0,5" >
                 <Button x:Name="FirstBlockButton" Content="В начало" Width="80" Margin="10,0,0,0" Click="FirstBlockButton_Click"/>

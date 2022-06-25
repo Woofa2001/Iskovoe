@@ -10,6 +10,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -35,9 +36,11 @@
             </StackPanel>
         </Grid>
 
-        <Image Margin="15" Source="image/photoroom.png" Width="100" Height="100" Grid.Row="1" HorizontalAlignment="Left"/>
+        <Rectangle Fill="Gray" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Height="2"/>
+        
+        <Image Margin="15" Source="image/photoroom.png" Width="100" Height="100" Grid.Row="2" HorizontalAlignment="Left"/>
 
-        <DockPanel Grid.Row="1" Grid.Column="1" >
+        <DockPanel Grid.Row="2" Grid.Column="1" >
             <StackPanel Margin="10,15,20,0">
                 <DockPanel >
                     <Label Content="Логин" Width="140" FontSize="15"/>
@@ -64,7 +67,7 @@
                     <PasswordBox x:Name="PasswordPasswordBoxTwo" TabIndex="2"/>
                 </DockPanel>
 
-                <DockPanel Height="30" Margin="5,14,0,0" LastChildFill="False" >d
+                <DockPanel Height="30" Margin="5,14,0,0" LastChildFill="False">
 
                     <Button x:Name="OkButton" Content="Зарегистрироваться" Width="152" 
                             DockPanel.Dock="Right" TabIndex="7" IsDefault="True"

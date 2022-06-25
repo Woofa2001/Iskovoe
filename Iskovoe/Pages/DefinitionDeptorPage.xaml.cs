@@ -87,11 +87,13 @@ namespace Iskovoe.Pages
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
+            string curDate = DateTime.Now.ToShortDateString();
             if (DataGridDeptors.SelectedItem != null)
             {
                 var A = new Data.Iskovoe();
                 A.id_executor = Id_executor+1;
                 A.Debtors = (Data.Debtors)DataGridDeptors.SelectedItem;
+                A.data_iscovoe = DateTime.Parse(curDate);
                 SourceCore.DB.Iskovoe.Add(A);
                 // Сохранение изменений
                 SourceCore.DB.SaveChanges();

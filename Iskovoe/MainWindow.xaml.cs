@@ -62,10 +62,10 @@ namespace Iskovoe
             {
                 INNLabel.Content = SourceCore.DB.Executor.ToList()[buf_id-1].Post.name_post.ToString();
             }
-            if (SourceCore.DB.Executor.ToList()[buf_id-1].passport != null)
-            {
-                KppLabel.Content = SourceCore.DB.Executor.ToList()[buf_id-1].passport.ToString();
-            }
+            //if (SourceCore.DB.Executor.ToList()[buf_id-1].passport != null)
+            //{
+            //    KppLabel.Content = SourceCore.DB.Executor.ToList()[buf_id-1].passport.ToString();
+            //}
             GetImageBase64FromDb(null);
         }
 
@@ -353,6 +353,11 @@ namespace Iskovoe
             }
             DataGridIscovoe.ItemsSource = SourceCore.DB.Iskovoe.Where(P => P.id_executor.Value == buf_id).OrderBy(P => P.id_dolg).Skip((BlockNum - 1) * BlockRecordsCount).Take(BlockRecordsCount).ToList();
             DataGridIscovoe.SelectedItem = Debtors;
+        }
+
+        private void ImageElipse_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }

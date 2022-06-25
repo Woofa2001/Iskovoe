@@ -65,21 +65,24 @@
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="45"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" MouseDown="RowDefinition_MouseDown">
             <Rectangle Fill="Transparent" Height="40" />
             <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,5,0,0" Height="40" Orientation="Horizontal" FlowDirection="RightToLeft">
-                <Label Foreground="White" FontSize="19">Название приложения</Label>
+                <Label FontSize="19">Конструктор правовых документов</Label>
             </StackPanel>
             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,10,0" Height="30" Orientation="Horizontal" FlowDirection="RightToLeft">
                 <Button x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Click="btnClose_Click" Tag="IsCloseButton"/>
                 <Button x:Name="btnMinimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource minimize}" Click="btnMinimize_Click"/>
             </StackPanel>
         </Grid>
+
+        <Rectangle Fill="Gray" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Height="2"/>
         
-        <Grid Grid.Row="1" Margin="0 5 0 5">
+        <Grid Grid.Row="2" Margin="0 5 0 5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="40"/>
@@ -89,34 +92,34 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <Label Foreground="White" FontSize="15" Margin="10 5" Width="155">Наименование/ФИО</Label>
+                <Label FontSize="15" Margin="10 5" Width="155">Наименование/ФИО</Label>
                 <TextBox Name="FIOTextBox" Width="380" Margin="10 5"/>
             </StackPanel>
 
             <StackPanel Grid.Row="1" Orientation="Horizontal">
-                <Label Foreground="White" FontSize="15" Width="155" Margin="10 5">ИНН</Label>
+                <Label FontSize="15" Width="155" Margin="10 5">ИНН</Label>
                 <TextBox Name="INNTextBox" Width="380" Margin="10 5"/>
             </StackPanel>
 
             <StackPanel Grid.Row="2" Orientation="Horizontal">
-                <Label Foreground="White" FontSize="15" Width="155" Margin="10 5">КПП</Label>
+                <Label FontSize="15" Width="155" Margin="10 5">КПП</Label>
                 <TextBox Name="KPPTextBox" Width="380" Margin="10 5"/>
             </StackPanel>
 
             <StackPanel Grid.Row="3" Orientation="Horizontal">
-                <Label Foreground="White" FontSize="15" Width="155" Margin="10 5">Телефон</Label>
+                <Label FontSize="15" Width="155" Margin="10 5">Телефон</Label>
                 <TextBox Name="PhoneTextBox" Width="380" Margin="10 5" />
                 <!--<TextBox extensions:TextBoxMask.Mask="+7999-9999"/>-->
             </StackPanel>
 
             <StackPanel Grid.Row="4" Orientation="Horizontal">
-                <Label Foreground="White" FontSize="15" Width="155" Margin="10 5">Адрес</Label>
+                <Label FontSize="15" Width="155" Margin="10 5">Адрес</Label>
                 <TextBox Name="AdressTextBox" Width="380" Margin="10 5"/>
             </StackPanel>
 
         </Grid>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal">
+        <StackPanel Grid.Row="3" Orientation="Horizontal">
             <Button Width="555" Margin=" 10 3 10 3" x:Name="AddDeptorsButton" Click="AddDeptorsButton_Click" Content="Добавить должника"/>
         </StackPanel>
 

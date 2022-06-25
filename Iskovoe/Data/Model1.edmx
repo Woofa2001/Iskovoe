@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище IskovoeModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище IskovoeModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Debtors">
           <Key>
             <PropertyRef Name="id_dolg" />
@@ -47,13 +47,14 @@
           <Property Name="id_dolg" Type="int" />
           <Property Name="id_executor" Type="int" />
           <Property Name="data_iscovoe" Type="date" />
+          <Property Name="status" Type="tinyint" />
         </EntityType>
         <EntityType Name="Period">
           <Key>
             <PropertyRef Name="id_period" />
           </Key>
           <Property Name="id_period" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="month" Type="int" Nullable="false" />
+          <Property Name="month" Type="varchar" MaxLength="50" />
           <Property Name="year" Type="int" />
           <Property Name="last_date" Type="date" />
         </EntityType>
@@ -264,7 +265,8 @@
             <End Role="Pravonor" EntitySet="Pravonor" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="IskovoeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -315,6 +317,7 @@
           <Property Name="id_dolg" Type="Int32" />
           <Property Name="id_executor" Type="Int32" />
           <Property Name="data_iscovoe" Type="DateTime" Precision="0" />
+          <Property Name="status" Type="Byte" />
           <NavigationProperty Name="Debtors" Relationship="Self.FK_Iskovoe_Debtors2" FromRole="Iskovoe" ToRole="Debtors" />
           <NavigationProperty Name="Executor" Relationship="Self.FK_Iskovoe_Executor" FromRole="Iskovoe" ToRole="Executor" />
           <NavigationProperty Name="Pravonor" Relationship="Self.FK_Pravonor_Iskovoe" FromRole="Iskovoe" ToRole="Pravonor" />
@@ -324,7 +327,7 @@
             <PropertyRef Name="id_period" />
           </Key>
           <Property Name="id_period" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="month" Type="Int32" Nullable="false" />
+          <Property Name="month" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="year" Type="Int32" />
           <Property Name="last_date" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Pravonor" Relationship="Self.FK_Pravonor_Period" FromRole="Period" ToRole="Pravonor" />
@@ -347,12 +350,12 @@
           <Property Name="id_sostav" Type="Int32" />
           <Property Name="id_period" Type="Int32" />
           <Property Name="opis" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="summa" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="Document_by_pravonor" Relationship="Self.FK_Docement_by_pravonor_Pravonor" FromRole="Pravonor" ToRole="Document_by_pravonor" />
           <NavigationProperty Name="Iskovoe" Relationship="Self.FK_Pravonor_Iskovoe" FromRole="Pravonor" ToRole="Iskovoe" />
           <NavigationProperty Name="Period" Relationship="Self.FK_Pravonor_Period" FromRole="Pravonor" ToRole="Period" />
           <NavigationProperty Name="Sostav" Relationship="Self.FK_Pravonor_Sostav" FromRole="Pravonor" ToRole="Sostav" />
           <NavigationProperty Name="Tip_forms" Relationship="Self.FK_Pravonor_Tip_forms" FromRole="Pravonor" ToRole="Tip_forms" />
-          <Property Name="summa" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="Sostav">
           <Key>
@@ -595,6 +598,7 @@
                 <ScalarProperty Name="id_dolg" ColumnName="id_dolg" />
                 <ScalarProperty Name="id_executor" ColumnName="id_executor" />
                 <ScalarProperty Name="data_iscovoe" ColumnName="data_iscovoe" />
+                <ScalarProperty Name="status" ColumnName="status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -619,13 +623,13 @@
           <EntitySetMapping Name="Pravonor">
             <EntityTypeMapping TypeName="IskovoeModel.Pravonor">
               <MappingFragment StoreEntitySet="Pravonor">
-                <ScalarProperty Name="summa" ColumnName="summa" />
                 <ScalarProperty Name="id_pravonor" ColumnName="id_pravonor" />
                 <ScalarProperty Name="id_iskovoe" ColumnName="id_iskovoe" />
                 <ScalarProperty Name="id_tip_form" ColumnName="id_tip_form" />
                 <ScalarProperty Name="id_sostav" ColumnName="id_sostav" />
                 <ScalarProperty Name="id_period" ColumnName="id_period" />
                 <ScalarProperty Name="opis" ColumnName="opis" />
+                <ScalarProperty Name="summa" ColumnName="summa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

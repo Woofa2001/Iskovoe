@@ -24,6 +24,7 @@ namespace Iskovoe.Data
         public Nullable<int> id_dolg { get; set; }
         public Nullable<int> id_executor { get; set; }
         public Nullable<System.DateTime> data_iscovoe { get; set; }
+        public Nullable<byte> status { get; set; }
     
         public virtual Debtors Debtors { get; set; }
         public virtual Executor Executor { get; set; }

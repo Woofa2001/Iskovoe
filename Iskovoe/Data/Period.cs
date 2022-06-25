@@ -21,7 +21,7 @@ namespace Iskovoe.Data
         }
     
         public int id_period { get; set; }
-        public int month { get; set; }
+        public string month { get; set; }
         public Nullable<int> year { get; set; }
         public Nullable<System.DateTime> last_date { get; set; }
     
